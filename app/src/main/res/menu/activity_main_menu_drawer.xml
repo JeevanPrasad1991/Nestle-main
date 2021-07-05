@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_download"
+            android:icon="@mipmap/download_grey"
+            android:title="@string/menu_daily_download" />
+        <item
+            android:id="@+id/nav_route_plan"
+            android:icon="@mipmap/entry_grey"
+            android:title="@string/menu_daily_route_plan" />
+        <item
+            android:id="@+id/nav_visibility_drive"
+            android:icon="@mipmap/entry_grey"
+            android:title="@string/menu_daily_visibility_drive" />
+
+        <item
+            android:id="@+id/nav_rdvisibility_drive"
+            android:icon="@mipmap/entry_grey"
+            android:title="@string/menu_daily_rdvisibility_drive" />
+
+        <item
+            android:id="@+id/nav_training"
+            android:icon="@mipmap/entry_grey"
+            android:title="@string/menu_daily_training" />
+
+        <item
+            android:id="@+id/nav_non_merchandize"
+            android:icon="@mipmap/download_grey"
+            android:title="@string/menu_non_merchandized"
+            android:visible="true"/>
+        <item
+            android:id="@+id/nav_upload"
+            android:icon="@mipmap/upload_grey"
+            android:title="@string/menu_upload_data" />
+        <item
+            android:id="@+id/nav_not_covered"
+            android:icon="@mipmap/download_grey"
+            android:title="@string/menu_not_covered"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_report"
+            android:icon="@mipmap/entry_grey"
+            android:title="Report"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_visitor"
+            android:icon="@mipmap/visitor"
+            android:visible="false"
+            android:title="@string/menu_visitorlogin" />
+
+
+        <item
+            android:id="@+id/nav_personal_docs"
+            android:icon="@mipmap/visitor"
+            android:title="Personal Document"
+            android:visible="false"/>
+
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@mipmap/exit_grey"
+            android:title="@string/menu_exit" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_services"
+                android:icon="@mipmap/services_grey"
+                android:title="@string/menu_services" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.cpm.Nestle.dailyEntry.ProfileActivity"
+    tools:showIn="@layout/activity_profile">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_hide"
+        android:visibility="visible"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    style="@style/selectionTextStyle"
+                    android:text="Retailer Name"/>
+                <EditText
+                    android:id="@+id/edt_retailername"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Retailer Name "
+                     android:padding="7dp"
+                    android:textSize="12sp"
+                    android:singleLine="true"
+                   android:editable="false"
+                    android:textStyle="normal" />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    style="@style/selectionTextStyle"
+                    android:text="Retailer Code"/>
+                <EditText
+                    android:id="@+id/edt_retailercode"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Retailer Code "
+                     android:padding="7dp"
+                    android:textSize="12sp"
+                    android:editable="false"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/selectionTextStyle"
+                android:text="Retailer Type"/>
+
+            <EditText
+                android:id="@+id/edt_retailertype"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rouded_corner"
+                android:hint="Enter Retailer Type "
+                 android:padding="7dp"
+                android:textSize="12sp"
+                android:editable="false"
+                android:singleLine="true"
+
+                android:textStyle="normal" />
+
+
+        </LinearLayout> <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/selectionTextStyle"
+                android:text="Chain Name"/>
+
+            <EditText
+                android:id="@+id/edt_chainname"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rouded_corner"
+                android:hint="Enter Chain Name"
+                 android:padding="7dp"
+                android:textSize="12sp"
+                android:editable="false"
+                android:singleLine="true"
+
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="LatLong"/>
+                <EditText
+                    android:id="@+id/edt_LAtLong"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Lat Long "
+                     android:padding="7dp"
+                    android:textSize="12sp"
+                    android:editable="false"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="State"/>
+                <EditText
+                    android:id="@+id/edt_state"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter State "
+                    android:padding="7dp"
+                    android:textSize="12sp"
+                    android:editable="false"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="City"/>
+                <EditText
+                    android:id="@+id/edt_city"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter City "
+                    android:editable="false"
+                    android:padding="7dp"
+                    android:textSize="12sp"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Pin Code"/>
+                <EditText
+                    android:id="@+id/edt_pincode"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Pin Code "
+                    android:inputType="number"
+                    android:padding="7dp"
+                    android:textSize="12sp"
+                    android:singleLine="true"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Address"/>
+                <EditText
+                    android:id="@+id/edt_cust1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Address "
+                    android:padding="7dp"
+                    android:textSize="12sp"
+                    android:singleLine="true"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Location"/>
+                <EditText
+                    android:id="@+id/edt_cust2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Location "
+                    android:padding="7dp"
+                    android:textSize="12sp"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Location Type"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner">
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/spn_locationtype"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:singleLine="true"
+
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Landmark"/>
+                <EditText
+                    android:id="@+id/edt_addstatus"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Landmark "
+                    android:padding="7dp"
+                    android:textSize="12sp"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Phone Number"/>
+                <EditText
+                    android:id="@+id/edt_phonenumber"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Phone Number "
+                    android:inputType="number"
+                    android:padding="7dp"
+                    android:textSize="12sp"
+                    android:maxLength="15"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Mobile Number"/>
+                <EditText
+                    android:id="@+id/edt_mobilenumber"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Mobile Number "
+                    android:inputType="number"
+                    android:padding="7dp"
+                    android:textSize="12sp"
+                    android:maxLength="10"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Drug License Number"/>
+                <EditText
+                    android:id="@+id/edt_Drug_License"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Drug License "
+                     android:padding="7dp"
+                    android:textSize="12sp"
+                    android:maxLength="15"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Tax Type"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner">
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/spn_gst"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:singleLine="true"
+
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:visibility="gone"
+                android:id="@+id/llgst"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="GST No"/>
+                <EditText
+                    android:id="@+id/edt_GST"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter GST No "
+                    android:maxLength="15"
+                     android:padding="7dp"
+                    android:textSize="12sp"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Tax Tpe"/>
+                <EditText
+                    android:id="@+id/edt_taxtype"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Tax Type "
+                    android:padding="7dp"
+                    android:textSize="12sp"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="PAN Card"/>
+                <EditText
+                    android:id="@+id/edt_panCard"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter PAN Card "
+                     android:padding="7dp"
+                    android:textSize="12sp"
+                   android:maxLength="10"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Contact Person"/>
+                <EditText
+                    android:id="@+id/edt_contactperson"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Contact Person "
+                     android:padding="7dp"
+                    android:textSize="12sp"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:text="Email"/>
+                <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Email "
+                     android:padding="7dp"
+                    android:textSize="12sp"
+                    android:singleLine="true"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/selectionTextStyle"
+                    android:id="@+id/btn_stock"
+                    android:text="Add Stockist Info"/>
+                <EditText
+                    android:id="@+id/edt_Country"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/rouded_corner"
+                    android:hint="Enter Country "
+                    android:padding="7dp"
+                    android:visibility="invisible"
+                    android:textSize="12sp"
+                    android:singleLine="true"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="end"
+        android:id="@+id/close"
+        android:src="@mipmap/cancel"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/selectionTextStyle"
+            android:text="	Stockist Name "/>
+        <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        style="@style/selectionTextStyle"
+        android:text=" Location"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+
+        <EditText
+            android:id="@+id/edt_stockiestname1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rouded_corner"
+            android:hint="Enter Stockist Name "
+            android:padding="7dp"
+            android:textSize="12sp"
+            android:singleLine="true"
+
+            android:textStyle="normal" />
+        <EditText
+        android:id="@+id/edt_stockiestlocation1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/rouded_corner"
+        android:hint=" Enter Location"
+        android:padding="7dp"
+        android:textSize="12sp"
+        android:singleLine="true"
+        android:layout_marginLeft="5dp"
+        android:textStyle="normal" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+
+    <Button
+            android:id="@+id/btnaddstockmore"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+             android:padding="7dp"
+   
+            android:textSize="12sp"
+            android:singleLine="true"
+           android:text="Add "
+        android:background="@color/white"
+           android:textStyle="normal" />
+        <Button
+            android:id="@+id/btnsavestock"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+             android:padding="7dp"
+            android:textSize="12sp"
+            android:singleLine="true"
+           android:text="Save"
+        android:visibility="gone"
+           android:textStyle="normal" />
+
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerview_visibility"/>
+
+<!--    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+
+        <EditText
+            android:id="@+id/edt_stockiestname2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rouded_corner"
+            android:hint="Enter Stockiest Name 2 "
+            android:padding="7dp"
+            android:textSize="12sp"
+            android:singleLine="true"
+
+            android:textStyle="normal" />   <EditText
+        android:id="@+id/edt_stockiestlocation2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/rouded_corner"
+        android:hint="Enter Location   "
+        android:padding="7dp"
+        android:textSize="12sp"
+        android:singleLine="true"
+        android:layout_marginLeft="5dp"
+        android:textStyle="normal" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+
+        <EditText
+            android:id="@+id/edt_stockiestname3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rouded_corner"
+            android:hint="Enter Stockiest Name 3"
+            android:padding="7dp"
+            android:textSize="12sp"
+            android:singleLine="true"
+
+            android:textStyle="normal" />   <EditText
+        android:id="@+id/edt_stockiestlocation3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/rouded_corner"
+        android:hint="Enter Location "
+        android:padding="7dp"
+        android:textSize="12sp"
+        android:singleLine="true"
+        android:layout_marginLeft="5dp"
+        android:textStyle="normal" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+
+        <EditText
+            android:id="@+id/edt_stockiestname4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rouded_corner"
+            android:hint="Enter Stockiest Name 4 "
+            android:padding="7dp"
+            android:textSize="12sp"
+            android:singleLine="true"
+
+            android:textStyle="normal" />   <EditText
+        android:id="@+id/edt_stockiestlocation4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/rouded_corner"
+        android:hint="Enter Location "
+        android:padding="7dp"
+        android:textSize="12sp"
+        android:singleLine="true"
+        android:layout_marginLeft="5dp"
+        android:textStyle="normal" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+
+        <EditText
+            android:id="@+id/edt_stockiestname5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rouded_corner"
+            android:hint="Enter Stockiest Name 5 "
+            android:padding="7dp"
+            android:textSize="12sp"
+            android:singleLine="true"
+
+            android:textStyle="normal" />   <EditText
+        android:id="@+id/edt_stockiestlocation5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/rouded_corner"
+        android:hint="Enter Location "
+        android:padding="7dp"
+        android:textSize="12sp"
+        android:singleLine="true"
+
+        android:textStyle="normal" />
+
+    </LinearLayout>-->
+</LinearLayout>

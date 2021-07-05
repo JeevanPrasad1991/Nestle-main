@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#58B4EF</color>
+    <color name="colorPrimaryDark">#187ABA</color>
+    <color name="colorAccent">#58B4EF</color>
+    <color name="primarycolor">#58B4EF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="lightpink">#fe8bd0</color>
+    <color name="black">#000000</color>
+    <color name="light_yellow">#FFF176</color>
+    <color name="text_yellow">#f9f93d</color>
+    <color name="red">#e21c22</color>
+    <color name="transparent">#00000000</color>
+    <color name="green">#4CAF50</color>
+    <color name="teal_dark">#fe8bd0</color>
+    <color name="teal_light">#009688</color>
+    <color name="green_dark">#388E3C</color>
+    <color name="teal_header">#00796B</color>
+    <color name="green_light">#66BB6A</color>
+    <color name="grey_background">#D3D3D3</color>
+    <color name="grey_light">#FAFAFA</color>
+    <color name="colorPSecond">#00bfff</color>
+    <color name="darkblue">#1E88E5</color>
+    <color name="lightsalmon">#FFA07A</color>
+    <color name="lightskyblue">#87CEFA</color>
+    <color name="gainsboro">#DCDCDC</color>
+    <color name="peachpuff">#FFDAB9</color>
+    <color name="ColorPrimaryLight">#187ABA</color>
+    <color name="text_grey_color">#c8c3c3</color>
+    <color name="grey_dark_background">#888</color>
+    <color name="circular_progress_default_progress">#bada55</color>
+    <color name="circular_progress_default_background">#787878</color>
+    <color name="circular_progress_default_title">#bada55</color>
+    <color name="circular_progress_default_subtitle">#D1D1D1</color>
+    <color name="darkgrey">#A9A9A9</color>
+    <color name="transparent_white">#F7F7F7</color>
+    <color name="very_dark_blue">#e6f2f6</color>
+   <!-- <color name="very_dark_blue">#2A2B33</color>-->
+    <color name="light_blue">#E6F8FF</color>
+    <color name="gray_for_text_color">#5a5a5a</color>
+    <color name="per_closed">#FFC450</color>
+    <color name="background_color">#E1E2E2</color>
+</resources>

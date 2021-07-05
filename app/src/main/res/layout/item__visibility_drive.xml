@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/grey_background">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="@dimen/custom_margin"
+        app:cardCornerRadius="@dimen/appbar_padding_top"
+        android:layout_margin="@dimen/txt_3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_stotre_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/custom_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Store Name:"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:padding="@dimen/appbar_padding_top"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/custom_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="City :"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:padding="@dimen/appbar_padding_top"
+                    android:textStyle="normal" />
+                <TextView
+                    android:id="@+id/txt_magic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/custom_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Magic Stick Name :"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:padding="@dimen/appbar_padding_top"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

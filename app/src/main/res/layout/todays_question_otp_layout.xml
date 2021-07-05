@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_background">
+
+   <!-- <androidx.cardview.widget.CardView-->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp">
+        <LinearLayout
+            android:id="@+id/ans_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_normal"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Please Submit OTP for Authentication"/>
+
+
+            <EditText
+                android:id="@+id/edt_otp"
+                android:layout_marginTop="@dimen/padding25dp"
+                android:layout_marginBottom="@dimen/padding25dp"
+                android:layout_marginLeft="@dimen/store_entry_icon_size"
+                android:layout_marginRight="@dimen/store_entry_icon_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="normal"
+                android:padding="@dimen/padding7dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:hint="Please Enter OTP"
+                android:maxLength="4"
+                android:inputType="number"
+                android:longClickable="false"
+                android:background="@drawable/rouded_corner"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_background">
+        <Button
+            android:id="@+id/btnsubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Submit"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#00ffffff">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:layout_marginLeft="20dp"
+        app:cardBackgroundColor="@color/colorPrimary">
+        <TextView
+            android:id="@+id/tv_desc"
+            android:text="test"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/white"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:src="@drawable/store_location_mark_small"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
+</LinearLayout>

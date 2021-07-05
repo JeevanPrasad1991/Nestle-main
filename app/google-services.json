@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "849755593477",
+    "firebase_url": "https://rbgthealthnew.firebaseio.com",
+    "project_id": "rbgthealthnew",
+    "storage_bucket": "rbgthealthnew.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849755593477:android:6552fcb04edce90a14356c",
+        "android_client_info": {
+          "package_name": "com.cpm.nestle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849755593477-i21nr6d5d3pmvt7posdmvp7uqaa42jdc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr6N1eKEZ9g5ieoWjcjkezDxDOPVRoRkM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849755593477-i21nr6d5d3pmvt7posdmvp7uqaa42jdc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

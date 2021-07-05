@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/circular_progress_default_subtitle"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".dailyEntry.StoreProfileActivity"
+    tools:showIn="@layout/activity_store_profile">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="?actionBarSize">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/custom_margin"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/appbar_padding_top"
+            app:cardElevation="@dimen/txt_3dp">
+
+            <LinearLayout
+                android:id="@+id/storePlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="@dimen/custom_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="4"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/appbar_padding_top"
+                        android:text="Store iD"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:id="@+id/txt_storeId"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:padding="@dimen/margin10dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size_14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="@dimen/custom_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="4"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/appbar_padding_top"
+                        android:text="Store Name"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:id="@+id/txt_store_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:padding="@dimen/margin10dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size_14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="@dimen/custom_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="4"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/appbar_padding_top"
+                        android:text="Address"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_normal" />
+
+
+                    <EditText
+                        android:id="@+id/edt_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:padding="@dimen/margin10dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:textStyle="normal"
+                        android:hint="Address"
+                        android:maxLength="70"
+                        android:inputType="text"
+                        android:background="@drawable/rouded_corner"
+                        android:textSize="@dimen/text_size_14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="@dimen/custom_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="21dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="4"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/appbar_padding_top"
+                        android:text="Landmark"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_normal" />
+
+
+                    <EditText
+                        android:id="@+id/edt_landmark"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:padding="@dimen/margin10dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:textStyle="normal"
+                        android:hint="Landmark"
+                        android:maxLength="70"
+                        android:inputType="text"
+                        android:background="@drawable/rouded_corner"
+                        android:textSize="@dimen/text_size_14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="@dimen/custom_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="4"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/appbar_padding_top"
+                        android:text="Pin Code"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_normal" />
+
+
+                    <EditText
+                        android:id="@+id/edt_pincode"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:padding="@dimen/margin10dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:textStyle="normal"
+                        android:hint="Pin Code"
+                        android:maxLength="6"
+                        android:inputType="number"
+                        android:background="@drawable/rouded_corner"
+                        android:textSize="@dimen/text_size_14sp" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="@dimen/custom_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="4"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/appbar_padding_top"
+                        android:text="City"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:id="@+id/txt_city"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:padding="@dimen/margin10dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size_14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="@dimen/custom_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="4"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/appbar_padding_top"
+                        android:text="Store Type"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:id="@+id/txt_storeType"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:padding="@dimen/margin10dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size_14sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+
+</LinearLayout>
