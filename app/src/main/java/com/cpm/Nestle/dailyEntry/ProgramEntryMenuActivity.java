@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cpm.Nestle.R;
@@ -100,7 +101,7 @@ public class ProgramEntryMenuActivity extends AppCompatActivity {
 
         @Override
         public ValueAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-            View view = inflator.inflate(R.layout.custom_menu_row, parent, false);
+            View view = inflator.inflate(R.layout.custom_program_row, parent, false);
             return new MyViewHolder(view);
         }
 
@@ -139,7 +140,6 @@ public class ProgramEntryMenuActivity extends AppCompatActivity {
                 }
             });
 
-
         }
 
         @Override
@@ -149,8 +149,8 @@ public class ProgramEntryMenuActivity extends AppCompatActivity {
 
 
         class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView menu_name_txt;
             ImageView menu_icon;
+            TextView menu_name_txt;
             CardView card_view;
 
             public MyViewHolder(View itemView) {

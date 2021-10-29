@@ -53,7 +53,7 @@
                             android:id="@+id/cam_one"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
-                            android:background="@mipmap/cs_black" />
+                            android:background="@mipmap/camera_orange" />
 
                         <ImageButton
                             android:id="@+id/cam_two"

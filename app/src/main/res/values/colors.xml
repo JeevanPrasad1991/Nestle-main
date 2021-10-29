@@ -11,6 +11,7 @@
     <color name="text_yellow">#f9f93d</color>
     <color name="red">#e21c22</color>
     <color name="transparent">#00000000</color>
+    <color name="list_header">#99979C</color>
     <color name="green">#4CAF50</color>
     <color name="teal_dark">#fe8bd0</color>
     <color name="teal_light">#009688</color>

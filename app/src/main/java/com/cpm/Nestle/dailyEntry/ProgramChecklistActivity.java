@@ -2,6 +2,7 @@ package com.cpm.Nestle.dailyEntry;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,10 +31,14 @@ import androidx.appcompat.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -77,6 +82,7 @@ public class ProgramChecklistActivity extends AppCompatActivity implements View.
     private ArrayAdapter<CharSequence> reason_adapter_visibility;
     String reasonname_visibility = "", reasonid_visiblity = "";
     LinearLayout lay_reasion;
+    ImageView img_ref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +94,18 @@ public class ProgramChecklistActivity extends AppCompatActivity implements View.
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.img_ref:
+                if (CommonFunctions.checkNetIsAvailable(context)){
+                    if (current_object!=null && current_object.getPlanogramImage()!=null && !current_object.getPlanogramImage().equals("")){
+                        showplanogramposm(context,current_object.getPlanogramImage());
+                    }else {
+                        AlertandMessages.showToastMsg(context,current_object.getSubProgramName() + " Ref image not found");
+                    }
+                }else {
+                    AlertandMessages.showToastMsg(context,getString(R.string.nonetwork));
+                }
+                break;
+
             case R.id.img_button_yes:
                 ischangedflag = true;
                 yes_flag = true;
@@ -588,7 +606,6 @@ public class ProgramChecklistActivity extends AppCompatActivity implements View.
                     } else {
                         CommonFunctions.startAnncaCameraActivity(context, _path, null, false, CommonString.CAMERA_FACE_REAR);
                     }
-
                 }
             });
 
@@ -990,6 +1007,7 @@ public class ProgramChecklistActivity extends AppCompatActivity implements View.
         toolbar.setTitleTextAppearance(context, R.style.changestext_sizefor_mobile);
         visit_date_formatted = preferences.getString(CommonString.KEY_YYYYMMDD_DATE, "");
         rec_checklist = (RecyclerView) findViewById(R.id.programchecklistRecycle);
+        img_ref = (ImageView) findViewById(R.id.img_ref);
         img_button_yes = (ImageView) findViewById(R.id.img_button_yes);
         img_button_no = (ImageView) findViewById(R.id.img_button_no);
         save_btn = (FloatingActionButton) findViewById(R.id.fab);
@@ -1009,6 +1027,7 @@ public class ProgramChecklistActivity extends AppCompatActivity implements View.
 
         setTitle("Program/" + current_object.getSubProgramName() + " - " + journeyPlan.getVisitDate());
         img_button_yes.setOnClickListener(this);
+        img_ref.setOnClickListener(this);
         img_button_no.setOnClickListener(this);
         save_btn.setOnClickListener(this);
         boolean for_refresh = false;
@@ -1171,5 +1190,74 @@ public class ProgramChecklistActivity extends AppCompatActivity implements View.
 
     }
 
+    private void showplanogramposm(Context context, String planogram_url) {
+        MultiPurposeDialog multiPurposeDialog = new MultiPurposeDialog(context);
+        multiPurposeDialog.setContentView(R.layout.custom_dialog_planogram);
+//        pd = ProgressDialog.show(context, "Parinaam", "Please wait......", true);
+        // Makes Progress bar Visible
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(multiPurposeDialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.gravity = Gravity.CENTER;
+        multiPurposeDialog.getWindow().setAttributes(lp);
+        multiPurposeDialog.setCancelable(true);
+        WebView webview = multiPurposeDialog.findViewById(R.id.webview);
+
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.setWebViewClient(new MyWebViewClient());
+        webview.loadUrl(planogram_url);
+        ImageView dismisDi = (ImageView) multiPurposeDialog.findViewById(R.id.planogram_dcancel);
+        dismisDi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                multiPurposeDialog.dismiss();
+            }
+        });
+        multiPurposeDialog.show();
+    }
+
+    public class MultiPurposeDialog extends Dialog {
+        public MultiPurposeDialog(Context context) {
+            super(context);
+            // DIALOG USER_INTERFACE TEMPLATE
+            WindowManager.LayoutParams wmLayoutParams = getWindow().getAttributes();
+            wmLayoutParams.gravity = Gravity.CENTER;
+            getWindow().setAttributes(wmLayoutParams);
+            setTitle(null);
+            setCancelable(false);
+            setOnCancelListener(null);
+            LinearLayout layout = new LinearLayout(context);
+            layout.setOrientation(LinearLayout.VERTICAL);
+        }
+
+        @Override
+        public void show() {
+            super.show();
+        }
+    }
+
+
+    private class MyWebViewClient extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            // pd.dismiss();
+            view.clearCache(true);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            //pd.show();
+        }
+    }
 
 }

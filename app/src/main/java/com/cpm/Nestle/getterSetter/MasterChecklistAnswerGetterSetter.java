@@ -43,5 +43,11 @@ public class MasterChecklistAnswerGetterSetter {
     public List<MappingVisicoolerChecklist> getMappingVisicoolerChecklist() {
         return mappingVisicoolerChecklist;
     }
+    @SerializedName("Store_Grading")
+    @Expose
+    private List<StoreGrading> storeGrading = null;
 
+    public List<StoreGrading> getStoreGrading() {
+        return storeGrading;
+    }
 }

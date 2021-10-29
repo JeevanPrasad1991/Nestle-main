@@ -86,7 +86,7 @@
                         android:id="@+id/image_window"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@mipmap/camera_pink" />
+                        android:background="@mipmap/camera_orange" />
                 </LinearLayout>
 
 

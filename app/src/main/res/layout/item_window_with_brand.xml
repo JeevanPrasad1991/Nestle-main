@@ -158,7 +158,7 @@
                             android:id="@+id/cam_close_up"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:background="@mipmap/camera_pink" />
+                            android:background="@mipmap/camera_orange" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                             android:id="@+id/cam_long_shot"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:background="@mipmap/camera_pink" />
+                            android:background="@mipmap/camera_orange" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

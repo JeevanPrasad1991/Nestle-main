@@ -31,7 +31,7 @@
             android:layout_width="75dp"
             android:layout_height="70dp"
             android:layout_centerInParent="true"
-            android:background="@mipmap/camera_pink_rotated" />
+            android:background="@mipmap/camera_orange" />
 
     </RelativeLayout>
 

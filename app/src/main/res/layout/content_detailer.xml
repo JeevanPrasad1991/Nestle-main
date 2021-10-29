@@ -59,7 +59,6 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:visibility="gone"
-                    android:src="@mipmap/mz_logo"
                     android:layout_centerInParent="true"/>
 
                 <!--<WebView

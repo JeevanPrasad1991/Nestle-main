@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".dailyEntry.ReportStoreGradingActivity"
+    android:background="@color/white"
+    tools:showIn="@layout/activity_store_grading">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/txt_size2dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_size2dp"
+                android:layout_marginRight="@dimen/txt_size2dp"
+                android:layout_marginBottom="@dimen/custom_margin"
+                app:cardBackgroundColor="@color/grey_light"
+                app:cardCornerRadius="@dimen/appbar_padding_top"
+                app:cardElevation="@dimen/txt_size2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/list_header"
+                    android:layout_margin="@dimen/txt_size2dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:padding="@dimen/appbar_padding_top"
+                            android:text="@string/period"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_very_small"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:padding="@dimen/appbar_padding_top"
+                            android:text="@string/programname"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/text_size_very_small"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:padding="@dimen/appbar_padding_top"
+                            android:text="@string/grade"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center|right"
+                            android:gravity="center|right"
+                            android:textSize="@dimen/text_size_very_small"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle_reports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/custom_margin" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

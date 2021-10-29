@@ -617,8 +617,7 @@ public class StoreListActivity extends AppCompatActivity implements View.OnClick
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 if (mid != null) {
-                                                    new DeleteCoverageData((current.getStoreId().toString()), (current.getVisitDate()),
-                                                            userId, true).execute();
+                                                    new DeleteCoverageData(current, true).execute();
                                                 } else {
                                                     Snackbar.make(recyclerView, CommonString.ba_message, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                                                 }
@@ -1014,13 +1013,11 @@ public class StoreListActivity extends AppCompatActivity implements View.OnClick
 
     public class DeleteCoverageData extends AsyncTask<Void, Void, String> {
         ProgressDialog pdialog = null;
-        String storeID, visitDate, userId;
         boolean showDeleteCoverageMsg;
+        MappingJourneyPlan current ;
 
-        DeleteCoverageData(String storeId, String visitDate, String userId, boolean showDeleteCoverageMsg) {
-            this.storeID = storeId;
-            this.visitDate = visitDate;
-            this.userId = userId;
+        DeleteCoverageData(MappingJourneyPlan current, boolean showDeleteCoverageMsg) {
+            this.current = current;
             this.showDeleteCoverageMsg = showDeleteCoverageMsg;
         }
 
@@ -1043,7 +1040,7 @@ public class StoreListActivity extends AppCompatActivity implements View.OnClick
                 db.open();
                 // for failure
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("Mid", mid);
+                jsonObject.put("Mid", current.getMID());
                 jsonObject.put("UserName", userId);
                 String jsonString2 = jsonObject.toString();
 
@@ -1105,9 +1102,9 @@ public class StoreListActivity extends AppCompatActivity implements View.OnClick
             if (result != null && !result.equals("") && result.equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
                 if (showDeleteCoverageMsg) {
                     AlertandMessages.showToastMsg(context, "Store Coverage Deleted Successfully.");
-                    UpdateStore(storeID);
+                    UpdateStore(current.getStoreId().toString());
                     Intent in = new Intent(context, NonWorkingActivity.class);
-                    in.putExtra(CommonString.KEY_STORE_ID, storeID);
+                    in.putExtra(CommonString.KEY_STORE_ID, current.getStoreId().toString());
                     in.putExtra(CommonString.TAG_FROM, tag_from);
                     startActivity(in);
                     overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
@@ -1385,7 +1382,7 @@ public class StoreListActivity extends AppCompatActivity implements View.OnClick
         }
         if (isVisitLater) {
             if (mid != null) {
-                new DeleteCoverageData(current.getStoreId().toString(), (current.getVisitDate()), userId, false).execute();
+                new DeleteCoverageData(current, false).execute();
                 UpdateStore(current.getStoreId().toString());
                 dialog.cancel();
             } else {

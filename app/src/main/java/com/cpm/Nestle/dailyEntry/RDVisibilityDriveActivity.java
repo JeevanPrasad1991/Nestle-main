@@ -309,7 +309,7 @@ public class RDVisibilityDriveActivity extends AppCompatActivity implements View
             case R.id.img_shop_board:
                 _pathforcheck = "RD_SHOP_BOARD_IMG_" + getCurrentTime().replace(":", "") + ".jpg";
                 _path = CommonString.FILE_PATH + _pathforcheck;
-                CommonFunctions.startAnncaCameraActivity(context, _path, null, true, CommonString.CAMERA_FACE_REAR);
+                CommonFunctions.startAnncaCameraActivity(context, _path, null, false, CommonString.CAMERA_FACE_REAR);
 
                 break;
 
@@ -322,7 +322,7 @@ public class RDVisibilityDriveActivity extends AppCompatActivity implements View
             case R.id.img_close_shot:
                 _pathforcheck = "RD_CLOSE_SHOT_IMG_" + getCurrentTime().replace(":", "") + ".jpg";
                 _path = CommonString.FILE_PATH + _pathforcheck;
-                CommonFunctions.startAnncaCameraActivity(context, _path, null, true, CommonString.CAMERA_FACE_REAR);
+                CommonFunctions.startAnncaCameraActivity(context, _path, null, false, CommonString.CAMERA_FACE_REAR);
 
                 break;
             case R.id.img_button_yes:

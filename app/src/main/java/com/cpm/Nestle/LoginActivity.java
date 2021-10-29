@@ -389,7 +389,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             dialog.dismiss();
-            if (result!=null && !result.equals("") && result.equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+            if (result != null && !result.equals("") && result.equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
                 if (preferences.getString(CommonString.KEY_VERSION, "").equals(Integer.toString(versionCode))) {
                     Intent in = new Intent(context, MPinActivity.class);
                     in.putExtra(CommonString.IS_PASSWORD_CHECK, false);
@@ -428,8 +428,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         editor = preferences.edit();
         museridView = (EditText) findViewById(R.id.userid);
         mPasswordView = (EditText) findViewById(R.id.password);
-      // museridView.setText("testmer");
-      //  mPasswordView.setText("Cpm@123%");
+        //museridView.setText("testmer");
+        //mPasswordView.setText("Cpm@123%");
         //museridView.setText("jitendra.s");
       /*  museridView.setText("nitin.s");
        mPasswordView.setText("Cpm@123%");*/
@@ -647,7 +647,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 checkAppPermission(Manifest.permission.READ_EXTERNAL_STORAGE, MY_PERMISSIONS_REQUEST_STORAGE_READ);
             } else if (requestCode == MY_PERMISSIONS_REQUEST_STORAGE_READ) {
                 checkAppPermission(Manifest.permission.ACCESS_FINE_LOCATION, MY_PERMISSIONS_REQUEST_LOCATION);
-            }else {
+            } else {
 
                 // Create a Folder for Images
                 if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(context,

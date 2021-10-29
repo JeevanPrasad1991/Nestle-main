@@ -250,6 +250,16 @@ public class EntryMenuActivity extends AppCompatActivity {
 
                     break;
 
+                case 11:
+                    db.open();
+                    if (db.getstoreGrading(journeyPlan).size() > 0) {
+                        icon_path = current.getNormalIcon();
+                    } else {
+                        icon_path = current.getGreyIcon();
+                    }
+
+                    break;
+
 
             }
 
@@ -347,6 +357,17 @@ public class EntryMenuActivity extends AppCompatActivity {
                             db.open();
                             if (db.getcategories(flag, cat).size() > 0) {
                                 startActivity(new Intent(context, VQPSActivity.class).putExtra(CommonString.TAG_OBJECT, journeyPlan)
+                                        .putExtra(CommonString.KEY_MENU_ID, current));
+                                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
+                            }
+
+                            break;
+
+                        case 11:
+                            db.open();
+                            if (db.getstoreGrading(journeyPlan).size() > 0) {
+                                startActivity(new Intent(context, ReportStoreGradingActivity.class).putExtra(CommonString.TAG_OBJECT, journeyPlan)
                                         .putExtra(CommonString.KEY_MENU_ID, current));
                                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 

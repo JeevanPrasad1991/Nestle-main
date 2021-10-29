@@ -33,7 +33,7 @@ public class AlertandMessages {
     }
 
     public static void showSnackbarMsg(Context context, String message) {
-        Snackbar.make(((Activity) context).getCurrentFocus(), message, Snackbar.LENGTH_SHORT).show();
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
 

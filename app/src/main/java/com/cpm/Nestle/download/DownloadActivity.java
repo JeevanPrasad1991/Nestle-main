@@ -91,10 +91,7 @@ public class DownloadActivity extends AppCompatActivity {
             keysList.add("Mapping_Promotion");
             keysList.add("Master_PromoType");
             keysList.add("Master_NonPromotionReason");
-            // keysList.add("JourneyPlan_NonMerchandised");
-            //keysList.add("Attendance_Report");
-            // keysList.add("Merchandiser_Performance");
-            // keysList.add("JourneyPlan_NotCovered");
+            keysList.add("Store_Grading");
 
             if (keysList.size() > 0) {
                 for (int i = 0; i < keysList.size(); i++) {
@@ -107,6 +104,7 @@ public class DownloadActivity extends AppCompatActivity {
                     jsonList.add(jsonObject.toString());
                     KeyNames.add(keysList.get(i));
                 }
+
 
                 if (jsonList.size() > 0) {
                     ProgressDialog pd = new ProgressDialog(context);
@@ -122,6 +120,4 @@ public class DownloadActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
 }

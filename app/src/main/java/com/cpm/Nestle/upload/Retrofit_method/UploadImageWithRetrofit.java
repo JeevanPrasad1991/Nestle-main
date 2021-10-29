@@ -19,30 +19,15 @@ import com.cpm.Nestle.R;
 import com.cpm.Nestle.dailyEntry.StoreListActivity;
 import com.cpm.Nestle.database.NestleDb;
 import com.cpm.Nestle.delegates.CoverageBean;
-import com.cpm.Nestle.getterSetter.AssetMaster;
-import com.cpm.Nestle.getterSetter.AttendanceReportGetterSetter;
-import com.cpm.Nestle.getterSetter.AuditDataGetterSetter;
-import com.cpm.Nestle.getterSetter.AvailabilityGetterSetter;
-import com.cpm.Nestle.getterSetter.CategoryMaster;
-import com.cpm.Nestle.getterSetter.ChecklistGetterSetter;
-import com.cpm.Nestle.getterSetter.CommonChillerDataGetterSetter;
 import com.cpm.Nestle.getterSetter.GeotaggingBeans;
 import com.cpm.Nestle.getterSetter.JCPGetterSetter;
-import com.cpm.Nestle.getterSetter.MappingAssetChecklist;
-import com.cpm.Nestle.getterSetter.MappingAssetChecklistGetterSetter;
-import com.cpm.Nestle.getterSetter.MappingAssetGetterSetter;
-import com.cpm.Nestle.getterSetter.MappingCategoryChecklistGetterSetter;
-import com.cpm.Nestle.getterSetter.MappingCategoryGetterSetter;
 import com.cpm.Nestle.getterSetter.MappingJourneyPlan;
 import com.cpm.Nestle.getterSetter.MappingMenuGetterSetter;
 import com.cpm.Nestle.getterSetter.MappingPosmGetterSetter;
-import com.cpm.Nestle.getterSetter.MappingProductAssortmentGetterSetter;
 import com.cpm.Nestle.getterSetter.MappingPromotion;
 import com.cpm.Nestle.getterSetter.MappingPromotionGetterSetter;
 import com.cpm.Nestle.getterSetter.MappingRDVisibilityDriveGetterSetter;
 import com.cpm.Nestle.getterSetter.MappingVQPSVisibilityDriveGetterSetter;
-import com.cpm.Nestle.getterSetter.MappingWindowChecklistGetterSetter;
-import com.cpm.Nestle.getterSetter.MappingWindowGetterSetter;
 import com.cpm.Nestle.getterSetter.MasterAsset;
 import com.cpm.Nestle.getterSetter.MasterAssetGetterSetter;
 import com.cpm.Nestle.getterSetter.MasterBrandGetterSetter;
@@ -54,28 +39,18 @@ import com.cpm.Nestle.getterSetter.MasterChecklistAnswerGetterSetter;
 import com.cpm.Nestle.getterSetter.MasterChecklistGetterSetter;
 import com.cpm.Nestle.getterSetter.MasterCompany;
 import com.cpm.Nestle.getterSetter.MasterDriveNonVisibilityGetterSetter;
-import com.cpm.Nestle.getterSetter.MasterFeedbackAnswerGetterSetter;
-import com.cpm.Nestle.getterSetter.MasterFeedbackQuestionGetterSetter;
 import com.cpm.Nestle.getterSetter.MasterNonProgramReasonGetterSetter;
 import com.cpm.Nestle.getterSetter.MasterPosm;
 import com.cpm.Nestle.getterSetter.MasterPosmGetterSetter;
 import com.cpm.Nestle.getterSetter.MasterProgram;
-import com.cpm.Nestle.getterSetter.MasterWindowGetterSetter;
 import com.cpm.Nestle.getterSetter.MenuMaster;
 import com.cpm.Nestle.getterSetter.MenuMasterGetterSetter;
-import com.cpm.Nestle.getterSetter.MerchandiserPerformanceGetterSetter;
-import com.cpm.Nestle.getterSetter.NonAssetReasonGetterSetter;
 import com.cpm.Nestle.getterSetter.NonPosmReasonGetterSetter;
-import com.cpm.Nestle.getterSetter.NonWindowReasonGetterSetter;
 import com.cpm.Nestle.getterSetter.NonWorkingReasonGetterSetter;
-import com.cpm.Nestle.getterSetter.PosCompanyGetterSetter;
-import com.cpm.Nestle.getterSetter.ProductMasterGetterSetter;
 import com.cpm.Nestle.getterSetter.ReferenceVariablesForDownloadActivity;
 import com.cpm.Nestle.getterSetter.StoreProfileGetterSetter;
 import com.cpm.Nestle.getterSetter.TableStructure;
 import com.cpm.Nestle.getterSetter.TableStructureGetterSetter;
-import com.cpm.Nestle.getterSetter.ViisbilityDriveGetterSetter;
-import com.cpm.Nestle.getterSetter.WindowMaster;
 import com.cpm.Nestle.upload.Retrofit_method.upload.ToStringConverterFactory;
 import com.cpm.Nestle.utilities.AlertandMessages;
 import com.cpm.Nestle.utilities.CommonString;
@@ -365,15 +340,16 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                             foldername = "TOTImages";
                         } else if (file[i].getName().contains("_VQPSImg-")) {
                             foldername = "VQPSImages";
-                        } else if (file[i].getName().contains("_promoimg-")) {
+                        } else if (file[i].getName().contains("_promoimg-") || file[i].getName().contains("_PClsShotImg-") ||
+                                file[i].getName().contains("_PLongShotImg-")) {
                             foldername = "PromotionImages";
                         } else if (file[i].getName().contains("_compPromoImg-") || file[i].getName().contains("_compPromoImgTwo-")) {
                             foldername = "CopmPromotionImages";
                         } else if (file[i].getName().contains("_compNPDImg-") || file[i].getName().contains("_compNPDImgTwo-")) {
                             foldername = "CompNPDLaunchImages";
-                        }else if (file[i].getName().contains("SHOP_BOARD_IMG_") || file[i].getName().contains("LONG_SHOT_IMG")||file[i].getName().contains("CLOSE_SHOT_IMG_")) {
+                        } else if (file[i].getName().contains("SHOP_BOARD_IMG_") || file[i].getName().contains("LONG_SHOT_IMG") || file[i].getName().contains("CLOSE_SHOT_IMG_")) {
                             foldername = "VisibilityDriveImages";
-                        }else if (file[i].getName().contains("RD_SHOP_BOARD_IMG_") || file[i].getName().contains("RD_LONG_SHOT_IMG")||file[i].getName().contains("RD_CLOSE_SHOT_IMG_")) {
+                        } else if (file[i].getName().contains("RD_SHOP_BOARD_IMG_") || file[i].getName().contains("RD_LONG_SHOT_IMG") || file[i].getName().contains("RD_CLOSE_SHOT_IMG_")) {
                             foldername = "RDVisibilityDriveImages";
                         } else {
                             foldername = "BulkImages";
@@ -390,12 +366,6 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                 if (finalFile == null) {
                     finalFile = originalFile;
                 }
-                String date;
-                if (false) {
-                    date = getParsedDate(filename);
-                } else {
-                    date = this.date;
-                }
                 isvalid = false;
 
                 OkHttpClient.Builder b = new OkHttpClient.Builder();
@@ -411,7 +381,7 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                 addFormDataPart("Foldername", foldername).
                                 addFormDataPart("UserName", _UserId).
                                 addFormDataPart("SecurityToken", SecurityToken).
-                                addFormDataPart("Path", date).build();
+                                addFormDataPart("Path", "123456").build();
 
                 adapter = new Retrofit.Builder()
                         .baseUrl(CommonString.URL3).addConverterFactory(new ToStringConverterFactory()).client(client).build();
@@ -574,8 +544,6 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                 case "Program_Data":
                     db.open();
                     JSONArray abl_childArray1 = new JSONArray();
-                   /* ArrayList<MasterChecklist> program_presents = db.getsubprogramChecklistpresentforupload(coverageList.get(coverageIndex).getStoreId(),
-                            coverageList.get(coverageIndex).getVisitDate(), false); */
                     ArrayList<MasterChecklist> program_presents = db.getsubprogramChecklistpresentforuploadResionNew(coverageList.get(coverageIndex).getStoreId(),
                             coverageList.get(coverageIndex).getVisitDate(), false);
                     if (program_presents.size() > 0) {
@@ -835,7 +803,7 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
 
                     break;
 
-                case "Promotion_Data":
+                case "Promotion":
                     JSONArray promoArray = new JSONArray();
                     db.open();
                     ArrayList<MappingPromotion> promotions = db.getinsertedpromotionsupload(coverageList.get(coverageIndex).getStoreId(), coverageList.get(coverageIndex).getVisitDate());
@@ -851,10 +819,12 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
 
 
                             if (!availe.equals("") && availe.equalsIgnoreCase("Yes")) {
-                                jsonObject.put("Image", promotions.get(k).getImage1());
+                                jsonObject.put("CloseShot", promotions.get(k).getCloseShotStr());
+                                jsonObject.put("LongShot", promotions.get(k).getLongShotStr());
                                 jsonObject.put("PReasonId", 0);
                             } else if (!availe.equals("") && availe.equalsIgnoreCase("No")) {
-                                jsonObject.put("Image", "");
+                                jsonObject.put("CloseShot", "");
+                                jsonObject.put("LongShot", "");
                                 jsonObject.put("PReasonId", promotions.get(k).getReasonId());
                             }
 
@@ -864,7 +834,7 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
 
                         jsonObject = new JSONObject();
                         jsonObject.put("MID", coverageList.get(coverageIndex).getMID());
-                        jsonObject.put("Keys", "Promotion_Data");
+                        jsonObject.put("Keys", "Promotion");
                         jsonObject.put("JsonData", promoArray.toString());
                         jsonObject.put("UserName", coverageList.get(coverageIndex).getUserId());
                         jsonObject.put("SecurityToken", SecurityToken);
@@ -1205,8 +1175,6 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                         db.open();
                                         db.updateCheckoutStatus(coverageList.get(tempcoverageIndex[0]).getStoreId().toString(), CommonString.KEY_D, CommonString.TABLE_Journey_Plan);
                                         db.updateCheckoutStatus(coverageList.get(tempcoverageIndex[0]).getStoreId(), CommonString.KEY_D, "JourneyPlan_NonMerchandised");
-                                        // db.updateCheckoutStatus(coverageList.get(tempcoverageIndex[0]).getStoreId(), CommonString.KEY_D, "JourneyPlan_NotCovered");
-                                        // db.updateCheckoutStatusDBSR(coverageList.get(tempcoverageIndex[0]).getStoreId(), CommonString.KEY_D, CommonString.TABLE_Journey_Plan_DBSR_Saved);
                                         tempcoverageIndex[0]++;
                                         if (tempcoverageIndex[0] != coverageList.size()) {
                                             uploadDataUsingCoverageRecursive(coverageList, tempcoverageIndex[0]);
@@ -1291,7 +1259,7 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                 keyList.add("Visicooler_Data");
                 keyList.add("POSM_Data");
                 keyList.add("TOT_Data");
-                keyList.add("Promotion_Data");
+                keyList.add("Promotion");
                 keyList.add("CompPromotion_Data");
                 keyList.add("NPDLaunch_Data");
                 keyList.add("VQPS_Data");
@@ -1392,21 +1360,15 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                 throw new Exception();
                             } else {
                                 statusUpdated = true;
-
+                                db.open();
                                 if (db.updateCheckoutStatus(String.valueOf(storeList.get(i).getStoreId()), CommonString.KEY_U, CommonString.TABLE_Journey_Plan) > 0) {
                                     db.deleteTableWithStoreID((storeList.get(i).getStoreId().toString()));
                                 }
 
+                                db.open();
                                 if (db.updateCheckoutStatus(String.valueOf(storeList.get(i).getStoreId()), CommonString.KEY_U, "JourneyPlan_NonMerchandised") > 0) {
                                     db.deleteTableWithStoreID((storeList.get(i).getStoreId().toString()));
                                 }
-                               /* if (db.updateCheckoutStatus(String.valueOf(storeList.get(i).getStoreId()), CommonString.KEY_U, "JourneyPlan_NotCovered") > 0) {
-                                    db.deleteTableWithStoreID((storeList.get(i).getStoreId().toString()));
-                                }
-                                if (db.updateCheckoutStatusDBSR(String.valueOf(storeList.get(i).getStoreId()), CommonString.KEY_U, CommonString.TABLE_Journey_Plan_DBSR_Saved) > 0) {
-                                    db.deleteTableWithStoreID((storeList.get(i).getStoreId().toString()));
-                                }*/
-
                             }
                         }
 
@@ -1436,8 +1398,8 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
             pd.dismiss();
             if (s.equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
                 if (totalFiles == uploadedFiles && statusUpdated) {
+                    db.open();
                     db.deletePreviousUploadedData(date);
-                    // db.deletePreviousJouneyPlanDBSRData(date);
                     AlertandMessages.showAlert((Activity) context, "All Data and Images Uploaded", true);
                 } else if (totalFiles == uploadedFiles && !statusUpdated) {
                     AlertandMessages.showAlert((Activity) context, "All images uploaded Successfully, but status not updated", true);
@@ -1693,6 +1655,10 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                                     pd.dismiss();
                                                     AlertandMessages.showToastMsg(context, "Menu Master data not saved");
                                                 }
+                                            } else {
+
+                                                db.open();
+                                                db.delete_table("Menu_Master");
                                             }
 
 
@@ -1706,7 +1672,9 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                                     AlertandMessages.showToastMsg(context, "Mapping Menu data not saved");
                                                 }
                                             } else {
-                                                throw new java.lang.Exception();
+
+                                                db.open();
+                                                db.delete_table("Mapping_Menu");
                                             }
 
                                             break;
@@ -1793,6 +1761,20 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                             } else {
                                                 db.open();
                                                 db.delete_table("Mapping_Visicooler");
+                                            }
+
+                                            break;
+
+                                        case "Store_Grading":
+                                            if (!data.contains("No Data")) {
+                                                storegrading = new Gson().fromJson(data, MasterChecklistAnswerGetterSetter.class);
+                                                if (storegrading != null && !db.insertStoreGrading(storegrading)) {
+                                                    pd.dismiss();
+                                                    AlertandMessages.showToastMsg(context, "Store_Grading data not saved");
+                                                }
+                                            } else {
+                                                db.open();
+                                                db.delete_table("Store_Grading");
                                             }
 
                                             break;
@@ -1995,9 +1977,9 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                                     AlertandMessages.showToastMsg(context, "JourneyPlan_NonMerchandisednot saved");
                                                 }
                                             } else {
-                                                //  throw new java.lang.Exception();
+                                                db.open();
+                                                db.delete_table("JourneyPlan_NonMerchandised");
                                             }
-
 
                                             break;
                                         case "Master_NonProgramReason":
@@ -2008,7 +1990,7 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                                     AlertandMessages.showToastMsg(context, "Master_NonProgramReason saved");
                                                 }
                                             } else {
-                                                //  throw new java.lang.Exception();
+                                                throw new java.lang.Exception();
                                             }
 
 
@@ -2023,11 +2005,13 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                                     AlertandMessages.showToastMsg(context, "JourneyPlan_NotCovered not saved");
                                                 }
                                             } else {
-                                                //  throw new java.lang.Exception();
+
+                                                db.open();
+                                                db.delete_table("JourneyPlan_NotCovered");
                                             }
 
                                             break;
-                                            case "Mapping_VQPS_VisibilityDrive":
+                                        case "Mapping_VQPS_VisibilityDrive":
                                             if (!data.contains("No Data")) {
                                                 mappingVQPSVisibilityDriveGetterSetter = new Gson().fromJson(data, MappingVQPSVisibilityDriveGetterSetter.class);
                                                 if (mappingVQPSVisibilityDriveGetterSetter != null && !db.insertVisibilityDriveData(mappingVQPSVisibilityDriveGetterSetter)) {
@@ -2035,11 +2019,12 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                                     AlertandMessages.showToastMsg(context, "Mapping_VQPS_VisibilityDrive not saved");
                                                 }
                                             } else {
-                                                //  throw new java.lang.Exception();
+                                                db.open();
+                                                db.delete_table("Mapping_VQPS_VisibilityDrive");
                                             }
 
                                             break;
-                                            case "Mapping_RD_VisibilityDrive":
+                                        case "Mapping_RD_VisibilityDrive":
                                             if (!data.contains("No Data")) {
                                                 mappingRDVisibilityDriveGetterSetter = new Gson().fromJson(data, MappingRDVisibilityDriveGetterSetter.class);
                                                 if (mappingRDVisibilityDriveGetterSetter != null && !db.insertRDVisibilityDriveData(mappingRDVisibilityDriveGetterSetter)) {
@@ -2047,11 +2032,13 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                                     AlertandMessages.showToastMsg(context, "Mapping_RD_VisibilityDrive not saved");
                                                 }
                                             } else {
-                                                //  throw new java.lang.Exception();
+
+                                                db.open();
+                                                db.delete_table("Mapping_RD_VisibilityDrive");
                                             }
 
                                             break;
-                                            case "Master_DriveNonVisibility":
+                                        case "Master_DriveNonVisibility":
                                             if (!data.contains("No Data")) {
                                                 masterDriveNonVisibilityGetterSetter = new Gson().fromJson(data, MasterDriveNonVisibilityGetterSetter.class);
                                                 if (masterDriveNonVisibilityGetterSetter != null && !db.insertMaster_DriveNonVisibilityData(masterDriveNonVisibilityGetterSetter)) {
@@ -2060,6 +2047,9 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                                 }
                                             } else {
                                                 //  throw new java.lang.Exception();
+
+                                                db.open();
+                                                db.delete_table("Master_DriveNonVisibility");
                                             }
 
                                             break;
@@ -2074,6 +2064,7 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                             } else {
                                                 throw new java.lang.Exception();
                                             }
+
                                             break;
                                     }
                                 }

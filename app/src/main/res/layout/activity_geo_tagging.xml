@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
         android:layout_margin="40dp"
-        android:src="@mipmap/camera_pink"
+        android:src="@mipmap/camera_orange"
         app:backgroundTint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

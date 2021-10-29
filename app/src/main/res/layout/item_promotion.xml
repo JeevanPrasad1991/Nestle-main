@@ -142,9 +142,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/text_size_20sp"
                     android:layout_marginBottom="@dimen/custom_margin"
-                    android:layout_marginTop="@dimen/custom_margin"
+                    android:layout_marginTop="@dimen/margin10dp"
                     android:visibility="gone">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -157,31 +156,53 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/PromoCloseShot"
+                                android:layout_width="@dimen/margin40dp"
+                                android:layout_height="@dimen/margin40dp"
+                                android:layout_gravity="center"
+                                android:src="@mipmap/camera_orange"/>
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/appbar_padding_top"
-                                android:text="Image"
-                                android:layout_gravity="center_vertical"
-                                android:gravity="center_vertical"
-                                android:textSize="@dimen/text_size_14sp"
+                                android:padding="@dimen/custom_margin"
+                                android:text="Close Shot"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textSize="@dimen/text_size_very_small"
                                 android:visibility="visible"
                                 android:textColor="@color/black"
                                 android:textStyle="normal"/>
+
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
+
                             <ImageView
-                                android:id="@+id/promo_img"
-                                android:layout_width="@dimen/custom_layout_margin35"
-                                android:layout_height="@dimen/custom_layout_margin35"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginTop="@dimen/txt_3dp"
-                                android:src="@mipmap/camera_orange"
-                                android:layout_marginRight="@dimen/custom_margin"/>
+                                android:id="@+id/PromoLongShot"
+                                android:layout_width="@dimen/margin40dp"
+                                android:layout_height="@dimen/margin40dp"
+                                android:layout_gravity="center"
+                                android:src="@mipmap/camera_orange"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/custom_margin"
+                                android:text="Long Shot"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textSize="@dimen/text_size_very_small"
+                                android:visibility="visible"
+                                android:textColor="@color/black"
+                                android:textStyle="normal"/>
+
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

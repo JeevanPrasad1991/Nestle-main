@@ -79,7 +79,7 @@
                 android:layout_marginBottom="3dp"
                 android:focusable="false"
                 android:visibility="gone"
-                android:background="@mipmap/checkout_button1"/>
+                android:background="@mipmap/checkout"/>
 
 
             <Button

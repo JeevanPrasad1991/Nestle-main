@@ -17,12 +17,12 @@ public class ReferenceVariablesForDownloadActivity {
     protected  MasterChecklistGetterSetter masterChecklistGetterSetter;
     protected  MasterAssetGetterSetter masterAssetGetterSetter,mappingpaidVisib,masaternonassetreason,masterassetlocation;
     protected  MappingPosmGetterSetter mappingPosmGetterSetter;
-    protected  MasterChecklistAnswerGetterSetter masterChecklistAnswerGetterSetter,mappingsubprogramchecklist,mappingprogram,mappingvisicooler_checklist, mappingvisicooler;
+    protected  MasterChecklistAnswerGetterSetter masterChecklistAnswerGetterSetter,mappingsubprogramchecklist,mappingprogram,mappingvisicooler_checklist,
+            mappingvisicooler,storegrading;
     protected  MasterPosmGetterSetter masterPosmGetterSetter;
     protected NonPosmReasonGetterSetter nonPosmReasonGetterSetter;
     protected MappingVQPSVisibilityDriveGetterSetter mappingVQPSVisibilityDriveGetterSetter;
     protected MappingRDVisibilityDriveGetterSetter mappingRDVisibilityDriveGetterSetter;
-    protected TrainingContentGetterSetter trainingContentGetterSetter;
     protected MasterDriveNonVisibilityGetterSetter masterDriveNonVisibilityGetterSetter;
     protected MasterNonProgramReasonGetterSetter masterNonProgramReasonGetterSetter;
 

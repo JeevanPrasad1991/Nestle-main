@@ -32,6 +32,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="3"
+                        android:layout_marginBottom="@dimen/custom_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:padding="@dimen/appbar_padding_top"
+                            android:text="Sub Program ref image"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/store_entry_text_size"
+                            android:visibility="invisible"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"/>
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/custom_layout_margin35"
+                            android:layout_weight=".5"
+                            android:layout_margin="@dimen/padding2dp"
+                            android:id="@+id/img_ref"
+                            android:src="@mipmap/ref"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

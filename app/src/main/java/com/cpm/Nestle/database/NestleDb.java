@@ -15,12 +15,11 @@ import com.cpm.Nestle.utilities.CommonString;
 import com.cpm.Nestle.visitor.VisitorDetail;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @SuppressLint("LongLogTag")
 public class NestleDb extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "NestleDb7";
+    public static final String DATABASE_NAME = "NestleDb";
     public static final int DATABASE_VERSION = 1;
     private SQLiteDatabase db;
     Context context;
@@ -424,6 +423,7 @@ public class NestleDb extends SQLiteOpenHelper {
                 values.put("SubProgramNormalIcon", jcpList.get(i).getSubProgramNormalIcon());
                 values.put("SubProgramTickIcon", jcpList.get(i).getSubProgramTickIcon());
                 values.put("SubProgramIconBaseColor", jcpList.get(i).getSubProgramIconBaseColor());
+                values.put("PlanogramImage", jcpList.get(i).getPlanogramImage());
 
 
                 long id = db.insert("Master_Program", null, values);
@@ -1376,7 +1376,7 @@ public class NestleDb extends SQLiteOpenHelper {
                     sb1.setPromoId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow("PromoId")));
                     sb1.setNonPromotionReasons(getnonpromotionreason());
                     sb1.setPresent("");
-                    sb1.setImage1("");
+                    sb1.setCloseShotStr("");
                     sb1.setReason("");
                     sb1.setReasonId(0);
                     sb1.setIsChecked(-1);
@@ -2043,7 +2043,8 @@ public class NestleDb extends SQLiteOpenHelper {
         try {
 
             if (jcp != null) {
-                dbcursor = db.rawQuery("Select Distinct t1.ProgramId,t1.ProgramName,t1.ImagePath,t1.ProgramNormalIcon,t1.ProgramTickIcon,t1.ProgramIconBaseColor" +
+                dbcursor = db.rawQuery("Select Distinct t1.PlanogramImage as PlanogramImage, t1.ProgramId,t1.ProgramName,t1.ImagePath" +
+                        ",t1.ProgramNormalIcon,t1.ProgramTickIcon,t1.ProgramIconBaseColor" +
                         " From Master_Program t1 inner join Mapping_Program t2 on t1.SubProgramId=t2.SubProgramId Where t2.StoreId=" +
                         jcp.getStoreId() + " Order By t1.ProgramId", null);
 
@@ -2064,6 +2065,7 @@ public class NestleDb extends SQLiteOpenHelper {
                         ch.setProgramNormalIcon(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ProgramNormalIcon")));
                         ch.setProgramTickIcon(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ProgramTickIcon")));
                         ch.setProgramIconBaseColor(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ProgramIconBaseColor")));
+                        ch.setPlanogramImage(dbcursor.getString(dbcursor.getColumnIndexOrThrow("PlanogramImage")));
                         ch.setProgramId(programId);
                         ch.setSubprogramList(getmasterSubProgram(jcp, programId));
                     } else {
@@ -2075,6 +2077,7 @@ public class NestleDb extends SQLiteOpenHelper {
                         ch.setProgramTickIcon(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ProgramTickIcon")));
                         ch.setSubProgramNormalIcon(dbcursor.getString(dbcursor.getColumnIndexOrThrow("SubProgramNormalIcon")));
                         ch.setSubProgramTickIcon(dbcursor.getString(dbcursor.getColumnIndexOrThrow("SubProgramTickIcon")));
+                        ch.setPlanogramImage(dbcursor.getString(dbcursor.getColumnIndexOrThrow("PlanogramImage")));
                     }
 
                     list.add(ch);
@@ -2098,7 +2101,7 @@ public class NestleDb extends SQLiteOpenHelper {
         Cursor dbcursor = null;
         try {
 
-            dbcursor = db.rawQuery("Select Distinct t1.SubProgramId,t1.SubProgramName,t1.SubProgramNormalIcon,t1.SubProgramTickIcon,t1.SubProgramIconBaseColor" +
+            dbcursor = db.rawQuery("Select Distinct t1.PlanogramImage, t1.SubProgramId,t1.SubProgramName,t1.SubProgramNormalIcon,t1.SubProgramTickIcon,t1.SubProgramIconBaseColor" +
                     " From Master_Program t1 inner join Mapping_Program t2 on t1.SubProgramId=t2.SubProgramId Where t2.StoreId=" + jcp.getStoreId()
                     + " and t1.ProgramId=" + programId + " Order By t1.SubProgramName", null);
 
@@ -2108,10 +2111,10 @@ public class NestleDb extends SQLiteOpenHelper {
                     MasterProgram ch = new MasterProgram();
                     ch.setSubProgramId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow("SubProgramId")));
                     ch.setSubProgramName(dbcursor.getString(dbcursor.getColumnIndexOrThrow("SubProgramName")));
-
                     ch.setSubProgramNormalIcon(dbcursor.getString(dbcursor.getColumnIndexOrThrow("SubProgramNormalIcon")));
                     ch.setSubProgramTickIcon(dbcursor.getString(dbcursor.getColumnIndexOrThrow("SubProgramTickIcon")));
                     ch.setSubProgramIconBaseColor(dbcursor.getString(dbcursor.getColumnIndexOrThrow("SubProgramIconBaseColor")));
+                    ch.setPlanogramImage(dbcursor.getString(dbcursor.getColumnIndexOrThrow("PlanogramImage")));
                     list.add(ch);
                     dbcursor.moveToNext();
                 }
@@ -3504,12 +3507,14 @@ public class NestleDb extends SQLiteOpenHelper {
                     String avai = listDataChild.get(i).getPresent();
                     values.put(CommonString.KEY_PRESENT, avai);
                     if (avai != null && avai.equalsIgnoreCase("Yes")) {
-                        values.put(CommonString.KEY_IMAGE, listDataChild.get(i).getImage1());
+                        values.put(CommonString.KEY_IMAGE, listDataChild.get(i).getCloseShotStr());
+                        values.put(CommonString.KEY_IMAGE2, listDataChild.get(i).getLongShotStr());
                         values.put(CommonString.KEY_REASON, "");
                         values.put(CommonString.KEY_REASON_ID, 0);
                         values.put(CommonString.KEY_CHECKED_iD, -1);
                     } else if (avai != null && avai.equalsIgnoreCase("No")) {
                         values.put(CommonString.KEY_IMAGE, "");
+                        values.put(CommonString.KEY_IMAGE2, "");
                         values.put(CommonString.KEY_REASON, listDataChild.get(i).getReason());
                         values.put(CommonString.KEY_REASON_ID, listDataChild.get(i).getReasonId());
                         values.put(CommonString.KEY_CHECKED_iD, listDataChild.get(i).getIsChecked());
@@ -3826,7 +3831,8 @@ public class NestleDb extends SQLiteOpenHelper {
                     sb.setPromoId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PROMOTION_ID)));
                     sb.setPromotion(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PROMOTION)));
                     sb.setPresent(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PRESENT)));
-                    sb.setImage1(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE)));
+                    sb.setCloseShotStr(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE)));
+                    sb.setLongShotStr(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE2)));
                     sb.setReasonId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_REASON_ID)));
                     sb.setReason(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_REASON)));
                     sb.setIsChecked(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_CHECKED_iD)));
@@ -3861,7 +3867,8 @@ public class NestleDb extends SQLiteOpenHelper {
                     sb.setCategoryId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_CATEGORY_ID)));
                     sb.setPromoId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PROMOTION_ID)));
                     sb.setPresent(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PRESENT)));
-                    sb.setImage1(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE)));
+                    sb.setCloseShotStr(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE)));
+                    sb.setLongShotStr(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE2)));
                     sb.setReasonId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_REASON_ID)));
 
                     list.add(sb);
@@ -4023,6 +4030,71 @@ public class NestleDb extends SQLiteOpenHelper {
                 values.put("VCType", data.get(i).getVCType());
 
                 long id = db.insert("Mapping_Visicooler", null, values);
+                if (id == -1) {
+                    throw new Exception();
+                }
+            }
+
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Log.d("Database Exception  ", ex.toString());
+            return false;
+        }
+    }
+
+
+
+    public ArrayList<StoreGrading> getstoreGrading(MappingJourneyPlan jcp) {
+        ArrayList<StoreGrading> list = new ArrayList<>();
+        Cursor dbcursor = null;
+        try {
+
+            if (jcp == null) {
+                dbcursor = db.rawQuery(" select * FROM Store_Grading", null);
+            } else {
+                dbcursor = db.rawQuery(" select * FROM Store_Grading where StoreId = " + jcp.getStoreId() + " order by Grade DESC", null);
+
+            }
+
+            if (dbcursor != null) {
+                dbcursor.moveToFirst();
+                while (!dbcursor.isAfterLast()) {
+                    StoreGrading sb1 = new StoreGrading();
+                    sb1.setPeriod(dbcursor.getString(dbcursor.getColumnIndexOrThrow("Period")));
+                    sb1.setProgramName(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ProgramName")));
+                    sb1.setGrade(dbcursor.getString(dbcursor.getColumnIndexOrThrow("Grade")));
+                    list.add(sb1);
+                    dbcursor.moveToNext();
+                }
+                dbcursor.close();
+                return list;
+            }
+
+        } catch (Exception e) {
+            return list;
+        }
+        return list;
+    }
+
+
+    public boolean insertStoreGrading(MasterChecklistAnswerGetterSetter masterChecklistAnswerGetterSetter) {
+        db.delete("Store_Grading", null, null);
+        ContentValues values = new ContentValues();
+        List<StoreGrading> data = masterChecklistAnswerGetterSetter.getStoreGrading();
+        try {
+            if (data.size() == 0) {
+                return false;
+            }
+
+            for (int i = 0; i < data.size(); i++) {
+                values.put("StoreId", data.get(i).getStoreId());
+                values.put("Srno", data.get(i).getSrno());
+                values.put("Period", data.get(i).getPeriod());
+                values.put("ProgramName", data.get(i).getProgramName());
+                values.put("Grade", data.get(i).getGrade());
+
+                long id = db.insert("Store_Grading", null, values);
                 if (id == -1) {
                     throw new Exception();
                 }
@@ -4777,10 +4849,8 @@ public class NestleDb extends SQLiteOpenHelper {
         Cursor dbcursor = null;
         try {
 
-
-         //   dbcursor = db.rawQuery("SELECT  * FROM Mapping_JourneyPlan WHERE UploadStatus ='" + staus + "'  AND VisitDate = '" + date + "'", null);
-            dbcursor = db.rawQuery("SELECT  * FROM Mapping_JourneyPlan WHERE UploadStatus ='" + staus +"'  AND VisitDate = '" + date +
-                    "' UNION SELECT  * FROM JourneyPlan_NonMerchandised  WHERE UploadStatus ='" + staus +"' and VisitDate = '" + date + "'", null);
+            dbcursor = db.rawQuery("SELECT * FROM Mapping_JourneyPlan WHERE UploadStatus ='" + staus +"'  AND VisitDate = '" + date +
+                    "' UNION SELECT * FROM JourneyPlan_NonMerchandised  WHERE UploadStatus ='" + staus +"' and VisitDate = '" + date + "'", null);
 
 
             if (dbcursor != null) {

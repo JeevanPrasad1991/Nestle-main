@@ -243,4 +243,7 @@
     <string name="title_activity_merchandising">MerchandisingActivity</string>
     <string name="invalid_token">In case of a invalid TOKEN can we show a message Invalid Security Token. Multiple Users are logged in using Same User ID.</string>
     <string name="title_activity_visibility_drive">VisibilityDriveActivity</string>
+    <string name="period">Period</string>
+    <string name="programname">Programs</string>
+    <string name="grade">Grade</string>
 </resources>

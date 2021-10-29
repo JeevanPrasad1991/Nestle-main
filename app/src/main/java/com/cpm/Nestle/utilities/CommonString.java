@@ -401,6 +401,7 @@ public class CommonString {
             + KEY_PROMOTION + " VARCHAR,"
             + KEY_PRESENT + " VARCHAR,"
             + KEY_IMAGE + " VARCHAR,"
+            + KEY_IMAGE2 + " VARCHAR,"
             + KEY_CHECKED_iD + " INTEGER,"
             + KEY_REASON_ID + " INTEGER,"
             + KEY_REASON + " VARCHAR)";

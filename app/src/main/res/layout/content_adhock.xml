@@ -103,7 +103,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="1.5"
-                    android:src="@mipmap/camera_pink_rotated" />
+                    android:src="@mipmap/camera_orange" />
 
             </LinearLayout>
 

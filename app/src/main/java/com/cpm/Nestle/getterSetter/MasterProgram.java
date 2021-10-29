@@ -44,6 +44,17 @@ public class MasterProgram implements Serializable {
     @SerializedName("SubProgramTickIcon")
     @Expose
     private String SubProgramTickIcon;
+    @SerializedName("PlanogramImage")
+    @Expose
+    private String planogramImage;
+
+    public String getPlanogramImage() {
+        return planogramImage;
+    }
+
+    public void setPlanogramImage(String planogramImage) {
+        this.planogramImage = planogramImage;
+    }
 
     public String getProgramNormalIcon() {
         return ProgramNormalIcon;

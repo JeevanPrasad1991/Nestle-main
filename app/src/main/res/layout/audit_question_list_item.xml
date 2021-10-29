@@ -77,7 +77,7 @@
                         android:id="@+id/img_cam"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@mipmap/camera_pink"
+                        android:background="@mipmap/camera_orange"
                         android:layout_marginRight="10dp"/>
                 </LinearLayout>
 

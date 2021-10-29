@@ -1,5 +1,6 @@
 package com.cpm.Nestle.dailyEntry;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -54,7 +55,7 @@ public class PromotionActivity extends AppCompatActivity implements View.OnClick
     Context context;
     SharedPreferences preferences;
     PromotionAdapter adapter;
-    String username, visit_date_formatted, _pathforcheck = "", _path, img_str1 = "", error_message = "";
+    String username, visit_date_formatted, _pathforcheck = "", _path, clsSHTimg_str1 = "", LongSHTimg_str2 = "", error_message = "";
     boolean ischangedflag = false, check_flag = true;
     FloatingActionButton save_btn;
     RecyclerView rec_checklist;
@@ -177,7 +178,7 @@ public class PromotionActivity extends AppCompatActivity implements View.OnClick
         }
 
         @Override
-        public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        public void onBindViewHolder(final MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
             MappingPromotion promoobj = data.get(position);
 
             holder.txt_category.setText("" + promoobj.getCategory_name());
@@ -239,9 +240,12 @@ public class PromotionActivity extends AppCompatActivity implements View.OnClick
                     holder.rl_for_nonassetreason.setVisibility(View.VISIBLE);
                     holder.rl_for_nonassetreason.setId(position);
 
-                    holder.promo_img.setImageResource(R.mipmap.camera_orange);
-                    holder.promo_img.setId(position);
-                    promoobj.setImage1("");
+                    holder.PromoCloseShot.setImageResource(R.mipmap.camera_orange);
+                    holder.PromoCloseShot.setId(position);
+                    holder.PromoLongShot.setImageResource(R.mipmap.camera_orange);
+                    holder.PromoLongShot.setId(position);
+                    promoobj.setCloseShotStr("");
+                    promoobj.setLongShotStr("");
 
                 }
             });
@@ -271,14 +275,27 @@ public class PromotionActivity extends AppCompatActivity implements View.OnClick
                 holder.checklist_btn_second.setId(position);
             }
 
-            holder.promo_img.setOnClickListener(new View.OnClickListener() {
+
+            holder.PromoCloseShot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     _pos = position;
                     _pathforcheck = journeyPlan.getStoreId() + "-" + promoobj.getCategoryId() + "-"
-                            + promoobj.getPromoId() + "_promoimg-" + visit_date_formatted + "-" + CommonFunctions.getCurrentTimeHHMMSS() + ".jpg";
+                            + promoobj.getPromoId() + "_PClsShotImg-" + visit_date_formatted + "-" + CommonFunctions.getCurrentTimeHHMMSS() + ".jpg";
                     _path = CommonString.FILE_PATH + _pathforcheck;
                     CommonFunctions.startAnncaCameraActivity(context, _path, null, false, CommonString.CAMERA_FACE_REAR);
+                }
+            });
+
+
+            holder.PromoLongShot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    _pos = position;
+                    _pathforcheck = journeyPlan.getStoreId() + "-" + promoobj.getCategoryId() + "-"
+                            + promoobj.getPromoId() + "_PLongShotImg-" + visit_date_formatted + "-" + CommonFunctions.getCurrentTimeHHMMSS() + ".jpg";
+                    _path = CommonString.FILE_PATH + _pathforcheck;
+                    CommonFunctions.startAnncaCameraActivity(context, _path, null, true, CommonString.CAMERA_FACE_REAR);
                 }
             });
 
@@ -351,29 +368,48 @@ public class PromotionActivity extends AppCompatActivity implements View.OnClick
 
             }
 
-            if (!img_str1.equals("")) {
+            if (!clsSHTimg_str1.equals("")) {
                 if (_pos == position) {
-                    promoobj.setImage1(img_str1);
-                    img_str1 = "";
+                    promoobj.setCloseShotStr(clsSHTimg_str1);
+                    clsSHTimg_str1 = "";
+                    _pos = -1;
+                }
+            }
+
+            if (!LongSHTimg_str2.equals("")) {
+                if (_pos == position) {
+                    promoobj.setLongShotStr(LongSHTimg_str2);
+                    LongSHTimg_str2 = "";
                     _pos = -1;
                 }
             }
 
 
-            if (!promoobj.getImage1().equals("")) {
-                holder.promo_img.setImageResource(R.mipmap.camera_green);
-                holder.promo_img.setId(position);
+            if (!promoobj.getCloseShotStr().equals("")) {
+                holder.PromoCloseShot.setImageResource(R.mipmap.camera_green);
+                holder.PromoCloseShot.setId(position);
             } else {
-                holder.promo_img.setImageResource(R.mipmap.camera_orange);
-                holder.promo_img.setId(position);
+                holder.PromoCloseShot.setImageResource(R.mipmap.camera_orange);
+                holder.PromoCloseShot.setId(position);
             }
+
+            if (!promoobj.getLongShotStr().equals("")) {
+                holder.PromoLongShot.setImageResource(R.mipmap.camera_green);
+                holder.PromoLongShot.setId(position);
+            } else {
+                holder.PromoLongShot.setImageResource(R.mipmap.camera_orange);
+                holder.PromoLongShot.setId(position);
+            }
+
 
             if (check_flag == false) {
                 boolean card_flag = false;
                 if (promoobj.getPresent().equals("")) {
                     card_flag = true;
-                } else if (promoobj.getPresent().equalsIgnoreCase("Yes") && promoobj.getImage1().equals("")) {
-                    card_flag = true;
+                } else if (promoobj.getPresent().equalsIgnoreCase("Yes")) {
+                    if (promoobj.getCloseShotStr().equals("") || promoobj.getLongShotStr().equals("")) {
+                        card_flag = true;
+                    }
                 } else if (promoobj.getPresent().equalsIgnoreCase("No") && promoobj.getReasonId() == 0) {
                     card_flag = true;
                 }
@@ -400,7 +436,7 @@ public class PromotionActivity extends AppCompatActivity implements View.OnClick
         class MyViewHolder extends RecyclerView.ViewHolder {
             LinearLayout rl_for_nonassetreason, rl_for_yespaidvisib, rl_category;
 
-            ImageView promo_img;
+            ImageView PromoCloseShot, PromoLongShot;
             Button checklist_btn_first, checklist_btn_second;
             TextView txt_category, txt_promotion;
             RadioGroup radiogrp;
@@ -413,7 +449,8 @@ public class PromotionActivity extends AppCompatActivity implements View.OnClick
                 txt_promotion = (TextView) itemView.findViewById(R.id.txt_promotion);
                 rl_category = (LinearLayout) itemView.findViewById(R.id.rl_category);
                 rl_for_yespaidvisib = (LinearLayout) itemView.findViewById(R.id.rl_for_yespaidvisib);
-                promo_img = (ImageView) itemView.findViewById(R.id.promo_img);
+                PromoCloseShot = (ImageView) itemView.findViewById(R.id.PromoCloseShot);
+                PromoLongShot = (ImageView) itemView.findViewById(R.id.PromoLongShot);
                 checklist_btn_first = (Button) itemView.findViewById(R.id.checklist_btn_first);
                 checklist_btn_second = (Button) itemView.findViewById(R.id.checklist_btn_second);
                 rl_for_nonassetreason = (LinearLayout) itemView.findViewById(R.id.rl_for_nonassetreason);
@@ -481,8 +518,10 @@ public class PromotionActivity extends AppCompatActivity implements View.OnClick
                             CommonFunctions.convertBitmap(CommonString.FILE_PATH + _pathforcheck);
                             String metadata = CommonFunctions.setMetadataAtImages(journeyPlan.getStoreName(), journeyPlan.getStoreId().toString(), menuMaster.getMenuName(), username);
                             CommonFunctions.addMetadataAndTimeStampToImage(context, _path, metadata, journeyPlan.getVisitDate());
-                            if (_pathforcheck.contains("_promoimg-")) {
-                                img_str1 = _pathforcheck;
+                            if (_pathforcheck.contains("_PClsShotImg-")) {
+                                clsSHTimg_str1 = _pathforcheck;
+                            } else {
+                                LongSHTimg_str2 = _pathforcheck;
                             }
 
                             _pathforcheck = "";
@@ -509,9 +548,13 @@ public class PromotionActivity extends AppCompatActivity implements View.OnClick
                     error_message = "Please Select Present";
                     break;
                 } else if (promotions.get(i).getPresent().equalsIgnoreCase("Yes")) {
-                    if (promotions.get(i).getImage1().equals("")) {
+                    if (promotions.get(i).getCloseShotStr().equals("")) {
                         check_flag = false;
-                        error_message = "Please Capture image";
+                        error_message = "Please Capture Close Shot.";
+                        break;
+                    } else if (promotions.get(i).getLongShotStr().equals("")) {
+                        check_flag = false;
+                        error_message = "Please Capture Long Shot.";
                         break;
                     }
                 } else if (promotions.get(i).getPresent().equalsIgnoreCase("No") && promotions.get(i).getReasonId() == 0) {

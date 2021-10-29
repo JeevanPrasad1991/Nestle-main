@@ -55,7 +55,7 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_marginRight="2dp"
-                    android:background="@mipmap/camera_pink"
+                    android:background="@mipmap/camera_orange"
                     android:layout_weight="2"/>
 
             </LinearLayout>

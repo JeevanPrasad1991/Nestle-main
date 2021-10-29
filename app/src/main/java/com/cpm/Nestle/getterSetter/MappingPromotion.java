@@ -76,7 +76,17 @@ public class MappingPromotion {
 
 
 
-    private String image1="";
+    private String closeShotStr ="";
+
+    public String getLongShotStr() {
+        return longShotStr;
+    }
+
+    public void setLongShotStr(String longShotStr) {
+        this.longShotStr = longShotStr;
+    }
+
+    private String longShotStr="";
     private String present= "";
     int isChecked=-1;
     int keyId;
@@ -102,11 +112,11 @@ public class MappingPromotion {
     public void setReason(String reason) {
         this.reason = reason;
     }
-    public String getImage1() {
-        return image1;
+    public String getCloseShotStr() {
+        return closeShotStr;
     }
-    public void setImage1(String image1) {
-        this.image1 = image1;
+    public void setCloseShotStr(String closeShotStr) {
+        this.closeShotStr = closeShotStr;
     }
     public String getPresent() {
         return present;
