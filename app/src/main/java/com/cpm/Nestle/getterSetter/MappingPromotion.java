@@ -140,13 +140,13 @@ public class MappingPromotion {
     public void setKeyId(int keyId) {
         this.keyId = keyId;
     }
-    ArrayList<MasterNonPromotionReason>nonPromotionReasons=new ArrayList<>();
+    ArrayList<MasterPromotionCheck>checklists=new ArrayList<>();
 
-    public ArrayList<MasterNonPromotionReason> getNonPromotionReasons() {
-        return nonPromotionReasons;
+    public ArrayList<MasterPromotionCheck> getChecklists() {
+        return checklists;
     }
 
-    public void setNonPromotionReasons(ArrayList<MasterNonPromotionReason> nonPromotionReasons) {
-        this.nonPromotionReasons = nonPromotionReasons;
+    public void setChecklists(ArrayList<MasterPromotionCheck> checklists) {
+        this.checklists = checklists;
     }
 }

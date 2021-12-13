@@ -428,8 +428,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         editor = preferences.edit();
         museridView = (EditText) findViewById(R.id.userid);
         mPasswordView = (EditText) findViewById(R.id.password);
-        //museridView.setText("testmer");
-        //mPasswordView.setText("Cpm@123%");
+       /* museridView.setText("testmer");
+        mPasswordView.setText("Cpm@123%");
+*/
         //museridView.setText("jitendra.s");
       /*  museridView.setText("nitin.s");
        mPasswordView.setText("Cpm@123%");*/

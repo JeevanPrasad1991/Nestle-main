@@ -18,36 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/rl_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:orientation="horizontal"
-                android:background="@color/per_closed"
-                android:layout_marginBottom="@dimen/txt_size2dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/txt_category"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="@dimen/appbar_padding_top"
-                        android:text="No of Prescription per month"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +31,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
-
                     <TextView
                         android:id="@+id/txt_promotion"
                         android:layout_width="0dp"
@@ -75,167 +44,15 @@
                         android:textColor="@color/black"
                         android:textStyle="bold"/>
                 </LinearLayout>
+
+
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/checklistRecycl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="@dimen/appbar_padding_top"
-                android:background="@drawable/rouded_corner_grey">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/custom_margin"
-                    android:orientation="horizontal"
-                    android:weightSum="9">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="3"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/custom_margin"
-                        android:text="Present"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_14sp" />
-
-                    <Button
-                        android:id="@+id/checklist_btn_first"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/custom_layout_margin35"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="3"
-                        android:background="@drawable/rouded_corner"
-                        android:gravity="center"
-                        android:text="Yes"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_14sp"
-                        android:textStyle="normal" />
-
-                    <Button
-                        android:id="@+id/checklist_btn_second"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/custom_layout_margin35"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="3"
-                        android:background="@drawable/rouded_corner"
-                        android:gravity="center"
-                        android:text="No"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_14sp"
-                        android:textStyle="normal" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/rl_for_yespaidvisib"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="@dimen/custom_margin"
-                    android:layout_marginTop="@dimen/margin10dp"
-                    android:visibility="gone">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/PromoCloseShot"
-                                android:layout_width="@dimen/margin40dp"
-                                android:layout_height="@dimen/margin40dp"
-                                android:layout_gravity="center"
-                                android:src="@mipmap/camera_orange"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/custom_margin"
-                                android:text="Close Shot"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:textSize="@dimen/text_size_very_small"
-                                android:visibility="visible"
-                                android:textColor="@color/black"
-                                android:textStyle="normal"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/PromoLongShot"
-                                android:layout_width="@dimen/margin40dp"
-                                android:layout_height="@dimen/margin40dp"
-                                android:layout_gravity="center"
-                                android:src="@mipmap/camera_orange"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/custom_margin"
-                                android:text="Long Shot"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:textSize="@dimen/text_size_very_small"
-                                android:visibility="visible"
-                                android:textColor="@color/black"
-                                android:textStyle="normal"/>
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/rl_for_nonassetreason"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/text_size_20sp"
-                    android:layout_marginBottom="@dimen/custom_margin"
-                    android:layout_marginTop="@dimen/custom_margin"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/appbar_padding_top"
-                        android:text="Please Select Non Promotion Reason"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        android:textSize="@dimen/text_size_14sp"
-                        android:visibility="visible"
-                        android:textColor="@color/black"
-                        android:textStyle="normal"/>
-                    <RadioGroup
-                        android:id="@+id/radiogrp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"/>
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_margin="@dimen/margin10dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

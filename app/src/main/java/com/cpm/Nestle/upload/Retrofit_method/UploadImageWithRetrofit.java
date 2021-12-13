@@ -43,6 +43,7 @@ import com.cpm.Nestle.getterSetter.MasterNonProgramReasonGetterSetter;
 import com.cpm.Nestle.getterSetter.MasterPosm;
 import com.cpm.Nestle.getterSetter.MasterPosmGetterSetter;
 import com.cpm.Nestle.getterSetter.MasterProgram;
+import com.cpm.Nestle.getterSetter.MasterPromotionCheck;
 import com.cpm.Nestle.getterSetter.MenuMaster;
 import com.cpm.Nestle.getterSetter.MenuMasterGetterSetter;
 import com.cpm.Nestle.getterSetter.NonPosmReasonGetterSetter;
@@ -89,7 +90,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
- * Created by upendra on 01/09/2020.
+ * Created by jeevanp on 01/09/2020.
  */
 
 public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivity {
@@ -341,7 +342,9 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                         } else if (file[i].getName().contains("_VQPSImg-")) {
                             foldername = "VQPSImages";
                         } else if (file[i].getName().contains("_promoimg-") || file[i].getName().contains("_PClsShotImg-") ||
-                                file[i].getName().contains("_PLongShotImg-")) {
+                                file[i].getName().contains("_PLongShotImg-") || file[i].getName().contains("_PromoChecklistImg-")
+                                || file[i].getName().contains("_PromoChecklistAnsImg-") ||
+                                file[i].getName().contains("_PromoCheckNonRImg-")) {
                             foldername = "PromotionImages";
                         } else if (file[i].getName().contains("_compPromoImg-") || file[i].getName().contains("_compPromoImgTwo-")) {
                             foldername = "CopmPromotionImages";
@@ -803,10 +806,10 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
 
                     break;
 
-                case "Promotion":
+                case "PromotionNew":
                     JSONArray promoArray = new JSONArray();
                     db.open();
-                    ArrayList<MappingPromotion> promotions = db.getinsertedpromotionsupload(coverageList.get(coverageIndex).getStoreId(), coverageList.get(coverageIndex).getVisitDate());
+                    ArrayList<MasterPromotionCheck> promotions = db.getinsertedpromotions(coverageList.get(coverageIndex).getStoreId(), coverageList.get(coverageIndex).getVisitDate());
                     if (promotions.size() > 0) {
                         for (int k = 0; k < promotions.size(); k++) {
                             jsonObject = new JSONObject();
@@ -814,27 +817,26 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                             jsonObject.put("UserName", _UserId);
                             jsonObject.put("CategoryId", promotions.get(k).getCategoryId());
                             jsonObject.put("PromoId", promotions.get(k).getPromoId());
-                            String availe = promotions.get(k).getPresent();
-                            jsonObject.put("Present", availe);
-
-
-                            if (!availe.equals("") && availe.equalsIgnoreCase("Yes")) {
-                                jsonObject.put("CloseShot", promotions.get(k).getCloseShotStr());
-                                jsonObject.put("LongShot", promotions.get(k).getLongShotStr());
-                                jsonObject.put("PReasonId", 0);
-                            } else if (!availe.equals("") && availe.equalsIgnoreCase("No")) {
-                                jsonObject.put("CloseShot", "");
-                                jsonObject.put("LongShot", "");
-                                jsonObject.put("PReasonId", promotions.get(k).getReasonId());
+                            jsonObject.put("ChecklistId", promotions.get(k).getChecklistId());
+                            jsonObject.put("AnsId", promotions.get(k).getAnswerId());
+                            jsonObject.put("QImage", promotions.get(k).getChecklist_img());
+                            jsonObject.put("AnsImage", promotions.get(k).getChecklistAnsImg());
+                            String stock = promotions.get(k).getStock();
+                            if (stock == null || stock.equals("")) {
+                                jsonObject.put("Stock", 0);
+                            } else {
+                                jsonObject.put("Stock", stock);
                             }
 
+                            jsonObject.put("NonReasonId", promotions.get(k).getNonReasonId());
+                            jsonObject.put("NonReasonImage", promotions.get(k).getCheckNonReasonImg());
                             promoArray.put(jsonObject);
                         }
 
 
                         jsonObject = new JSONObject();
                         jsonObject.put("MID", coverageList.get(coverageIndex).getMID());
-                        jsonObject.put("Keys", "Promotion");
+                        jsonObject.put("Keys", "PromotionNew");
                         jsonObject.put("JsonData", promoArray.toString());
                         jsonObject.put("UserName", coverageList.get(coverageIndex).getUserId());
                         jsonObject.put("SecurityToken", SecurityToken);
@@ -1259,7 +1261,7 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                 keyList.add("Visicooler_Data");
                 keyList.add("POSM_Data");
                 keyList.add("TOT_Data");
-                keyList.add("Promotion");
+                keyList.add("PromotionNew");
                 keyList.add("CompPromotion_Data");
                 keyList.add("NPDLaunch_Data");
                 keyList.add("VQPS_Data");
@@ -1689,6 +1691,34 @@ public class UploadImageWithRetrofit extends ReferenceVariablesForDownloadActivi
                                                 }
                                             } else {
                                                 throw new java.lang.Exception();
+                                            }
+
+                                            break;
+
+                                        case "Master_PromotionChecklist":
+                                            if (!data.contains("No Data")) {
+                                                masterpromoChecklist = new Gson().fromJson(data, MasterChecklistGetterSetter.class);
+                                                if (masterpromoChecklist != null && !db.insertMaster_promoChecklist(masterpromoChecklist)) {
+                                                    pd.dismiss();
+                                                    AlertandMessages.showSnackbarMsg(context, "Master_PromotionChecklist data not saved");
+                                                }
+                                            } else {
+                                                db.open();
+                                                db.delete_table("Master_PromotionChecklist");
+                                            }
+
+                                            break;
+
+                                        case "Master_PromotionChecklistReason":
+                                            if (!data.contains("No Data")) {
+                                                masterpromoChecklistans = new Gson().fromJson(data, MasterChecklistGetterSetter.class);
+                                                if (masterpromoChecklistans != null && !db.insertMaster_promoChecklistAns(masterpromoChecklistans)) {
+                                                    pd.dismiss();
+                                                    AlertandMessages.showSnackbarMsg(context, "Master_PromotionChecklistReason data not saved");
+                                                }
+                                            } else {
+                                                db.open();
+                                                db.delete_table("Master_PromotionChecklistReason");
                                             }
 
                                             break;

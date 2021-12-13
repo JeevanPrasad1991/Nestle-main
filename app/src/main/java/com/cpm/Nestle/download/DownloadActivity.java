@@ -90,8 +90,10 @@ public class DownloadActivity extends AppCompatActivity {
             keysList.add("Master_AssetLocation");
             keysList.add("Mapping_Promotion");
             keysList.add("Master_PromoType");
-            keysList.add("Master_NonPromotionReason");
+            //keysList.add("Master_NonPromotionReason");
             keysList.add("Store_Grading");
+            keysList.add("Master_PromotionChecklist");
+            keysList.add("Master_PromotionChecklistReason");
 
             if (keysList.size() > 0) {
                 for (int i = 0; i < keysList.size(); i++) {

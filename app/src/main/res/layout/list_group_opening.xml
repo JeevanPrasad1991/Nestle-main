@@ -10,59 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/txt_3dp"
-        card_view:cardBackgroundColor="@color/teal_dark"
-        card_view:cardCornerRadius="@dimen/custom_margin">
+        card_view:cardBackgroundColor="@color/per_closed"
+        card_view:cardCornerRadius="@dimen/custom_margin"
+        card_view:cardElevation="@dimen/txt_size2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:padding="@dimen/appbar_padding_top"
             android:weightSum="10">
 
             <TextView
                 android:id="@+id/lblListHeader"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="8.5"
+                android:layout_weight="10"
                 android:gravity="center_vertical"
                 android:paddingBottom="@dimen/custom_margin"
-                android:paddingLeft="25dp"
+                android:paddingLeft="@dimen/custom_layout_margin35"
                 android:paddingTop="@dimen/custom_margin"
                 android:text="Header"
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_small" />
-
-            <RelativeLayout
-                android:visibility="visible"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:layout_margin="@dimen/custom_margin"
-                android:background="@drawable/rouded_corner"
-                android:gravity="center_horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@color/transparent">
-
-                    <ImageView
-                        android:id="@+id/img_cam_cat"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerInParent="true"
-                        android:layout_marginRight="2dp"
-                        android:layout_weight="2"
-                        android:visibility="visible"
-                        android:layout_gravity="center|right"
-                        android:src="@mipmap/camera_orange"
-                        />
-
-                </LinearLayout>
-
-            </RelativeLayout>
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_normal" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

@@ -176,9 +176,9 @@ public class PreviousDataUploadActivity extends AppCompatActivity {
 
                 case 5:
                     db.open();
-                    if (db.getPromotionData(journeyPlan).size() > 0) {
+                    if (db.getPromotionCategory(journeyPlan).size() > 0) {
                         db.open();
-                        if (db.getinsertedpromotions(journeyPlan).size() > 0) {
+                        if (db.getinsertedpromotions(journeyPlan.getStoreId().toString(),journeyPlan.getVisitDate()).size() > 0) {
                             status = true;
                         } else {
                             status = false;

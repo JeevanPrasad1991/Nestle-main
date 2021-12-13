@@ -15,4 +15,20 @@ public class MasterChecklistGetterSetter {
         return masterChecklist;
     }
 
+    @SerializedName("Master_PromotionChecklist")
+    @Expose
+    private List<MasterPromotionCheck> masterPromotionChecklist = null;
+
+    public List<MasterPromotionCheck> getMasterPromotionChecklist() {
+        return masterPromotionChecklist;
+    }
+    @SerializedName("Master_PromotionChecklistReason")
+    @Expose
+    private List<MasterPromotionChecklistReason> masterPromotionChecklistReason = null;
+
+    public List<MasterPromotionChecklistReason> getMasterPromotionChecklistReason() {
+        return masterPromotionChecklistReason;
+    }
+
+
 }

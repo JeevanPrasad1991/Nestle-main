@@ -15,12 +15,13 @@ import com.cpm.Nestle.utilities.CommonString;
 import com.cpm.Nestle.visitor.VisitorDetail;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @SuppressLint("LongLogTag")
 public class NestleDb extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "NestleDb";
-    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "NestleDatsfgfkhfkgd";
+    public static final int DATABASE_VERSION = 10;
     private SQLiteDatabase db;
     Context context;
 
@@ -1327,19 +1328,48 @@ public class NestleDb extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<MasterNonPromotionReason> getnonpromotionreason() {
-        ArrayList<MasterNonPromotionReason> list = new ArrayList<>();
+    public ArrayList<MasterPromotionCheck> getnonpromotionreason(String storeId, String visit_date, int promoId, int categorYId) {
+        ArrayList<MasterPromotionCheck> list = new ArrayList<>();
         Cursor dbcursor = null;
         try {
 
-            dbcursor = db.rawQuery("select * from Master_NonPromotionReason", null);
+            dbcursor = db.rawQuery("select distinct T.FirstSelect,T.LongShotImage,T.ChecklistId,T.Checklist,T.ImageMandatory,ifnull(Y.QImageAllow,0)as QImageAllow," +
+                    "ifnull(Y.StockAllow,0)as StockAllow,ifnull(Y.ImageAllow,0)as ImageAllow," +
+                    " ifnull(Y.ReasonAllow,0)as ReasonAllow,ifnull(P.ANSWER_CD,0)as ANSWER_CD,ifnull(P.STOCK,'')as STOCK," +
+                    "ifnull(P.REASON_ID,0)as REASON_ID, ifnull(W.ImageAllow,0)as NonImageAllow," +
+                    " ifnull(P.IMAGE1,'')as IMAGE1,ifnull(P.IMAGE2,'')as IMAGE2,ifnull(P.IMAGE3,'')as IMAGE3" +
+                    " from Master_PromotionChecklist T" +
+                    " Left Join " +
+                    " (Select * From DR_PROMOTION where STORE_ID =" + storeId + " and VISIT_DATE = '" + visit_date +
+                    "' and CATEGORY_ID =" + categorYId + " and PROMOTION_ID =" + promoId + ") as P on T.ChecklistId = P.CHECKLIST_ID" +
+                    " left join (SELECT * from Master_PromotionChecklist )as Y on P.ANSWER_CD=Y.AnswerId and P.CHECKLIST_ID=Y.ChecklistId" +
+                    " Left join (SELECT * from Master_PromotionChecklistReason ) AS W on P.REASON_ID = W.ReasonId and P.CHECKLIST_ID=W.ChecklistId", null);
 
             if (dbcursor != null) {
                 dbcursor.moveToFirst();
                 while (!dbcursor.isAfterLast()) {
-                    MasterNonPromotionReason sb1 = new MasterNonPromotionReason();
-                    sb1.setReason(dbcursor.getString(dbcursor.getColumnIndexOrThrow("Reason")));
-                    sb1.setReasonId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow("ReasonId")));
+                    MasterPromotionCheck sb1 = new MasterPromotionCheck();
+                    sb1.setChecklist(dbcursor.getString(dbcursor.getColumnIndexOrThrow("Checklist")));
+                    sb1.setChecklistId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow("ChecklistId")));
+                    sb1.setLongShotImage("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("LongShotImage"))));
+                    sb1.setFirstSelect("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("FirstSelect"))));
+                    sb1.setImageMandatory("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ImageMandatory"))));
+                    sb1.setqImageAllow("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("QImageAllow"))));
+                    sb1.setStockAllow("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("StockAllow"))));
+                    sb1.setImageAllow("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ImageAllow"))));
+                    sb1.setReasonAllow("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ReasonAllow"))));
+                    sb1.setNonreasonimageAllow("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("NonImageAllow"))));
+                    sb1.setAnswerId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow("ANSWER_CD")));
+                    sb1.setStock(dbcursor.getString(dbcursor.getColumnIndexOrThrow("STOCK")));
+                    sb1.setNonReasonId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow("REASON_ID")));
+
+                    sb1.setChecklist_img(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE1)));
+                    sb1.setChecklistAnsImg(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE2)));
+                    sb1.setCheckNonReasonImg(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE3)));
+
+                    sb1.setCheckAns(getpromoCheckAnswer(sb1.getChecklistId()));
+                    sb1.setChecklistNonReasonList(getpromoCheckNonReason(sb1.getChecklistId()));
+
                     list.add(sb1);
                     dbcursor.moveToNext();
                 }
@@ -1357,12 +1387,95 @@ public class NestleDb extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<MappingPromotion> getPromotionData(MappingJourneyPlan journeyPlan) {
+    public ArrayList<MasterPromotionCheck> getpromoCheckAnswer(int checklistId) {
+        ArrayList<MasterPromotionCheck> list = new ArrayList<>();
+        Cursor dbcursor = null;
+        try {
+
+            MasterPromotionCheck check = new MasterPromotionCheck();
+            check.setAnswerId(0);
+            check.setAnswer("Select");
+            check.setqImageAllow(false);
+            check.setStockAllow(false);
+            check.setImageAllow(false);
+            check.setReasonAllow(false);
+            check.setLongShotImage(false);
+            list.add(0, check);
+
+            dbcursor = db.rawQuery("select distinct LongShotImage,QImageAllow,StockAllow,ImageAllow,ReasonAllow,AnswerId,Answer" +
+                    " from Master_PromotionChecklist Where ChecklistId =" + checklistId + "", null);
+
+            if (dbcursor != null) {
+                dbcursor.moveToFirst();
+                while (!dbcursor.isAfterLast()) {
+                    MasterPromotionCheck sb1 = new MasterPromotionCheck();
+                    sb1.setqImageAllow("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("QImageAllow"))));
+                    sb1.setStockAllow("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("StockAllow"))));
+                    sb1.setImageAllow("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ImageAllow"))));
+                    sb1.setReasonAllow("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ReasonAllow"))));
+                    sb1.setLongShotImage("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("LongShotImage"))));
+                    sb1.setAnswerId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow("AnswerId")));
+                    sb1.setAnswer(dbcursor.getString(dbcursor.getColumnIndexOrThrow("Answer")));
+
+                    list.add(sb1);
+                    dbcursor.moveToNext();
+                }
+                dbcursor.close();
+                return list;
+            }
+
+        } catch (Exception e) {
+            Log.d("Exception when fetching", e.toString());
+            return list;
+        }
+
+        Log.d("Fetching non working", "-------------------");
+        return list;
+    }
+
+
+    public ArrayList<MasterPromotionChecklistReason> getpromoCheckNonReason(int checklistId) {
+        ArrayList<MasterPromotionChecklistReason> list = new ArrayList<>();
+        Cursor dbcursor = null;
+        try {
+            MasterPromotionChecklistReason sb = new MasterPromotionChecklistReason();
+            sb.setReason("Select");
+            sb.setReasonId(0);
+            sb.setImageAllow(false);
+            list.add(0, sb);
+
+            dbcursor = db.rawQuery("select distinct ImageAllow,ReasonId,Reason from Master_PromotionChecklistReason Where ChecklistId =" + checklistId + "", null);
+
+            if (dbcursor != null) {
+                dbcursor.moveToFirst();
+                while (!dbcursor.isAfterLast()) {
+                    MasterPromotionChecklistReason sb1 = new MasterPromotionChecklistReason();
+                    sb1.setImageAllow("1".equals(dbcursor.getString(dbcursor.getColumnIndexOrThrow("ImageAllow"))));
+                    sb1.setReasonId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow("ReasonId")));
+                    sb1.setReason(dbcursor.getString(dbcursor.getColumnIndexOrThrow("Reason")));
+                    list.add(sb1);
+                    dbcursor.moveToNext();
+                }
+                dbcursor.close();
+                return list;
+            }
+
+        } catch (Exception e) {
+            Log.d("Exception when fetching", e.toString());
+            return list;
+        }
+
+        Log.d("Fetching non working", "-------------------");
+        return list;
+    }
+
+
+    public ArrayList<MappingPromotion> getPromotionCategory(MappingJourneyPlan journeyPlan) {
         ArrayList<MappingPromotion> list = new ArrayList<>();
         Cursor dbcursor = null;
         try {
 
-            dbcursor = db.rawQuery("Select Distinct m1.CategoryId,m1.CategoryName,m.PromoId,m.Promotion FROM Mapping_Promotion m" +
+            dbcursor = db.rawQuery("Select Distinct m1.CategoryId as CategoryId,m1.CategoryName as CategoryName FROM Mapping_Promotion m" +
                     " inner join Master_Category m1 on m1.CategoryId=m.CategoryId where m.ChannelId =" + journeyPlan.getChannelId() +
                     " and m.StoreTypeId =" + journeyPlan.getStoreTypeId() + " and m.StateId =" + journeyPlan.getStateId() + "", null);
 
@@ -1372,17 +1485,40 @@ public class NestleDb extends SQLiteOpenHelper {
                     MappingPromotion sb1 = new MappingPromotion();
                     sb1.setCategory_name(dbcursor.getString(dbcursor.getColumnIndexOrThrow("CategoryName")));
                     sb1.setCategoryId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow("CategoryId")));
+                    list.add(sb1);
+                    dbcursor.moveToNext();
+                }
+                dbcursor.close();
+                return list;
+            }
+
+        } catch (Exception e) {
+            Log.d("Exception when fetching", e.toString());
+            return list;
+        }
+
+        Log.d("Fetching non working", "-------------------");
+        return list;
+    }
+
+    public ArrayList<MappingPromotion> getPromotionData(MappingJourneyPlan journeyPlan, int categorYiD) {
+        ArrayList<MappingPromotion> list = new ArrayList<>();
+        Cursor dbcursor = null;
+        try {
+
+            dbcursor = db.rawQuery("Select Distinct m.PromoId as PromoId,m.Promotion as Promotion FROM Mapping_Promotion m" +
+                    " inner join Master_Category m1 on m1.CategoryId=m.CategoryId where m.ChannelId =" + journeyPlan.getChannelId() +
+                    " and m.StoreTypeId =" + journeyPlan.getStoreTypeId() + " and m.StateId =" + journeyPlan.getStateId() +
+                    " And m1.CategoryId =" + categorYiD + "", null);
+
+            if (dbcursor != null) {
+                dbcursor.moveToFirst();
+                while (!dbcursor.isAfterLast()) {
+                    MappingPromotion sb1 = new MappingPromotion();
                     sb1.setPromotion(dbcursor.getString(dbcursor.getColumnIndexOrThrow("Promotion")));
                     sb1.setPromoId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow("PromoId")));
-                    sb1.setNonPromotionReasons(getnonpromotionreason());
-                    sb1.setPresent("");
-                    sb1.setCloseShotStr("");
-                    sb1.setReason("");
-                    sb1.setReasonId(0);
-                    sb1.setIsChecked(-1);
-
+                    sb1.setChecklists(getnonpromotionreason(journeyPlan.getStoreId().toString(), journeyPlan.getVisitDate(), sb1.getPromoId(), categorYiD));
                     list.add(sb1);
-
                     dbcursor.moveToNext();
                 }
                 dbcursor.close();
@@ -1883,6 +2019,73 @@ public class NestleDb extends SQLiteOpenHelper {
 
 
                 long id = db.insert("Master_Checklist", null, values);
+                if (id == -1) {
+                    throw new Exception();
+                }
+            }
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Log.d("Database Exception  ", ex.toString());
+            return false;
+        }
+    }
+
+
+    public boolean insertMaster_promoChecklist(MasterChecklistGetterSetter masterChecklistGetterSetter) {
+        db.delete("Master_PromotionChecklist", null, null);
+        ContentValues values = new ContentValues();
+        List<MasterPromotionCheck> data = masterChecklistGetterSetter.getMasterPromotionChecklist();
+        try {
+            if (data.size() == 0) {
+                return false;
+            }
+
+            for (int i = 0; i < data.size(); i++) {
+
+                values.put("ChecklistId", data.get(i).getChecklistId());
+                values.put("Checklist", data.get(i).getChecklist());
+                values.put("QImageAllow", data.get(i).isQImageAllow());
+                values.put("ImageMandatory", data.get(i).isImageMandatory());
+                values.put("StockAllow", data.get(i).isStockAllow());
+                values.put("AnswerId", data.get(i).getAnswerId());
+                values.put("Answer", data.get(i).getAnswer());
+
+                values.put("ImageAllow", data.get(i).isImageAllow());
+                values.put("ReasonAllow", data.get(i).isReasonAllow());
+                values.put("LongShotImage", data.get(i).isLongShotImage());
+                values.put("FirstSelect", data.get(i).isFirstSelect());
+
+                long id = db.insert("Master_PromotionChecklist", null, values);
+                if (id == -1) {
+                    throw new Exception();
+                }
+            }
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Log.d("Database Exception  ", ex.toString());
+            return false;
+        }
+    }
+
+    public boolean insertMaster_promoChecklistAns(MasterChecklistGetterSetter masterChecklistGetterSetter) {
+        db.delete("Master_PromotionChecklistReason", null, null);
+        ContentValues values = new ContentValues();
+        List<MasterPromotionChecklistReason> data = masterChecklistGetterSetter.getMasterPromotionChecklistReason();
+        try {
+            if (data.size() == 0) {
+                return false;
+            }
+
+            for (int i = 0; i < data.size(); i++) {
+
+                values.put("ChecklistId", data.get(i).getChecklistId());
+                values.put("ReasonId", data.get(i).getReasonId());
+                values.put("Reason", data.get(i).getReason());
+                values.put("ImageAllow", data.get(i).isImageAllow());
+
+                long id = db.insert("Master_PromotionChecklistReason", null, values);
                 if (id == -1) {
                     throw new Exception();
                 }
@@ -2823,7 +3026,6 @@ public class NestleDb extends SQLiteOpenHelper {
     }
 
 
-
     public MasterChecklist getsubprogramChecklistpresentResionNew(MappingJourneyPlan jcp, MasterProgram object, boolean flag_forvisicooler) {
         MasterChecklist list = new MasterChecklist();
         Cursor dbcursor = null;
@@ -3061,7 +3263,7 @@ public class NestleDb extends SQLiteOpenHelper {
     }
 
 
-    public long InsertSubprogramChecklist(MappingJourneyPlan jcp, MasterProgram current_object, String Ispresent, ArrayList<MasterChecklist> listDataChild,String resionName,String resionId) {
+    public long InsertSubprogramChecklist(MappingJourneyPlan jcp, MasterProgram current_object, String Ispresent, ArrayList<MasterChecklist> listDataChild, String resionName, String resionId) {
         long l = 0, common_id = 0;
         db.delete(CommonString.TABLE_PROGRAM_CHECKLIST_PRESENT, CommonString.KEY_STORE_ID + "=" + jcp.getStoreId() +
                 " AND " + CommonString.KEY_VISIT_DATE + "='" + jcp.getVisitDate() + "' AND " + CommonString.KEY_SUB_PROGRAM_ID + "="
@@ -3489,42 +3691,62 @@ public class NestleDb extends SQLiteOpenHelper {
     }
 
 
-    public long insertpromotions(MappingJourneyPlan jcp, ArrayList<MappingPromotion> listDataChild) {
+    public long insertpromotions(MappingJourneyPlan jcp, HashMap<MappingPromotion, List<MappingPromotion>> data,
+                                 List<MappingPromotion> save_listDataHeader) {
         long l = 0;
         db.delete(CommonString.TABLE_PROMOTION_DATA, CommonString.KEY_STORE_ID + "=" + jcp.getStoreId() + " AND " +
                 CommonString.KEY_VISIT_DATE + "='" + jcp.getVisitDate() + "'", null);
         ContentValues values = null;
         try {
-            if (listDataChild.size() > 0) {
-                for (int i = 0; i < listDataChild.size(); i++) {
-                    values = new ContentValues();
-                    values.put(CommonString.KEY_VISIT_DATE, jcp.getVisitDate());
-                    values.put(CommonString.KEY_STORE_ID, jcp.getStoreId());
-                    values.put(CommonString.KEY_CATEGORY_ID, listDataChild.get(i).getCategoryId());
-                    values.put(CommonString.KEY_CATEGORY, listDataChild.get(i).getCategory_name());
-                    values.put(CommonString.KEY_PROMOTION_ID, listDataChild.get(i).getPromoId());
-                    values.put(CommonString.KEY_PROMOTION, listDataChild.get(i).getPromotion());
-                    String avai = listDataChild.get(i).getPresent();
-                    values.put(CommonString.KEY_PRESENT, avai);
-                    if (avai != null && avai.equalsIgnoreCase("Yes")) {
-                        values.put(CommonString.KEY_IMAGE, listDataChild.get(i).getCloseShotStr());
-                        values.put(CommonString.KEY_IMAGE2, listDataChild.get(i).getLongShotStr());
-                        values.put(CommonString.KEY_REASON, "");
-                        values.put(CommonString.KEY_REASON_ID, 0);
-                        values.put(CommonString.KEY_CHECKED_iD, -1);
-                    } else if (avai != null && avai.equalsIgnoreCase("No")) {
-                        values.put(CommonString.KEY_IMAGE, "");
-                        values.put(CommonString.KEY_IMAGE2, "");
-                        values.put(CommonString.KEY_REASON, listDataChild.get(i).getReason());
-                        values.put(CommonString.KEY_REASON_ID, listDataChild.get(i).getReasonId());
-                        values.put(CommonString.KEY_CHECKED_iD, listDataChild.get(i).getIsChecked());
+
+            db.beginTransaction();
+            for (int f = 0; f < save_listDataHeader.size(); f++) {
+                for (int j = 0; j < data.get(save_listDataHeader.get(f)).size(); j++) {
+                    ArrayList<MasterPromotionCheck> checklist = data.get(save_listDataHeader.get(f)).get(j).getChecklists();
+                    for (int k = 0; k < checklist.size(); k++) {
+                        values = new ContentValues();
+                        values.put(CommonString.KEY_VISIT_DATE, jcp.getVisitDate());
+                        values.put(CommonString.KEY_STORE_ID, jcp.getStoreId());
+                        values.put(CommonString.KEY_CATEGORY_ID, checklist.get(k).getCategoryId());
+                        values.put(CommonString.KEY_PROMOTION_ID, checklist.get(k).getPromoId());
+                        values.put(CommonString.KEY_CHECKLIST_ID, checklist.get(k).getChecklistId());
+                        values.put(CommonString.KEY_ANSWER_CD, checklist.get(k).getAnswerId());
+                        if (checklist.get(k).isqImageAllow()) {
+                            values.put(CommonString.KEY_IMAGE1, checklist.get(k).getChecklist_img());
+                        } else {
+                            values.put(CommonString.KEY_IMAGE1, "");
+                        }
+
+                        if (checklist.get(k).isImageAllow()) {
+                            values.put(CommonString.KEY_IMAGE2, checklist.get(k).getChecklistAnsImg());
+                        } else {
+                            values.put(CommonString.KEY_IMAGE2, "");
+                        }
+
+                        if (checklist.get(k).isNonreasonimageAllow()) {
+                            values.put(CommonString.KEY_IMAGE3, checklist.get(k).getCheckNonReasonImg());
+                        } else {
+                            values.put(CommonString.KEY_IMAGE3, "");
+                        }
+
+                        if (checklist.get(k).isStockAllow()) {
+                            values.put(CommonString.KEY_STOCK, checklist.get(k).getStock());
+                        } else {
+                            values.put(CommonString.KEY_STOCK, 0);
+                        }
+
+                        if (checklist.get(k).isReasonAllow()) {
+                            values.put(CommonString.KEY_REASON_ID, checklist.get(k).getNonReasonId());
+                        } else {
+                            values.put(CommonString.KEY_REASON_ID, 0);
+                        }
+
+                        l = db.insert(CommonString.TABLE_PROMOTION_DATA, null, values);
                     }
-
-                    l = db.insert(CommonString.TABLE_PROMOTION_DATA, null, values);
-
                 }
             }
-
+            db.setTransactionSuccessful();
+            db.endTransaction();
             if (l > 0) {
                 return l;
             } else {
@@ -3814,46 +4036,8 @@ public class NestleDb extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<MappingPromotion> getinsertedpromotions(MappingJourneyPlan jcpGetset) {
-        ArrayList<MappingPromotion> list = new ArrayList<>();
-        Cursor dbcursor = null;
-        try {
-
-            dbcursor = db.rawQuery("SELECT * FROM " + CommonString.TABLE_PROMOTION_DATA + " WHERE " + CommonString.KEY_STORE_ID + "="
-                    + jcpGetset.getStoreId() + " AND " + CommonString.KEY_VISIT_DATE + "='" + jcpGetset.getVisitDate() + "'", null);
-
-            if (dbcursor != null) {
-                dbcursor.moveToFirst();
-                while (!dbcursor.isAfterLast()) {
-                    MappingPromotion sb = new MappingPromotion();
-                    sb.setCategoryId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_CATEGORY_ID)));
-                    sb.setCategory_name(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_CATEGORY)));
-                    sb.setPromoId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PROMOTION_ID)));
-                    sb.setPromotion(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PROMOTION)));
-                    sb.setPresent(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PRESENT)));
-                    sb.setCloseShotStr(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE)));
-                    sb.setLongShotStr(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE2)));
-                    sb.setReasonId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_REASON_ID)));
-                    sb.setReason(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_REASON)));
-                    sb.setIsChecked(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_CHECKED_iD)));
-                    sb.setNonPromotionReasons(getnonpromotionreason());
-
-                    list.add(sb);
-                    dbcursor.moveToNext();
-                }
-                dbcursor.close();
-                return list;
-            }
-        } catch (Exception e) {
-            Log.d("Exception get JCP!", e.toString());
-            return list;
-        }
-
-        return list;
-    }
-
-    public ArrayList<MappingPromotion> getinsertedpromotionsupload(String storeId, String visit_date) {
-        ArrayList<MappingPromotion> list = new ArrayList<>();
+    public ArrayList<MasterPromotionCheck> getinsertedpromotions(String storeId, String visit_date) {
+        ArrayList<MasterPromotionCheck> list = new ArrayList<>();
         Cursor dbcursor = null;
         try {
 
@@ -3863,24 +4047,31 @@ public class NestleDb extends SQLiteOpenHelper {
             if (dbcursor != null) {
                 dbcursor.moveToFirst();
                 while (!dbcursor.isAfterLast()) {
-                    MappingPromotion sb = new MappingPromotion();
-                    sb.setCategoryId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_CATEGORY_ID)));
-                    sb.setPromoId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PROMOTION_ID)));
-                    sb.setPresent(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PRESENT)));
-                    sb.setCloseShotStr(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE)));
-                    sb.setLongShotStr(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE2)));
-                    sb.setReasonId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_REASON_ID)));
+                    MasterPromotionCheck sb1 = new MasterPromotionCheck();
+                    sb1.setCategoryId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_CATEGORY_ID)));
+                    sb1.setPromoId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PROMOTION_ID)));
+                    sb1.setChecklistId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_CHECKLIST_ID)));
+                    sb1.setAnswerId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_ANSWER_CD)));
+                    sb1.setStock(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_STOCK)));
+                    sb1.setNonReasonId(dbcursor.getInt(dbcursor.getColumnIndexOrThrow(CommonString.KEY_REASON_ID)));
 
-                    list.add(sb);
+                    sb1.setChecklist_img(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE1)));
+                    sb1.setChecklistAnsImg(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE2)));
+                    sb1.setCheckNonReasonImg(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE3)));
+
+                    list.add(sb1);
                     dbcursor.moveToNext();
                 }
                 dbcursor.close();
                 return list;
             }
+
         } catch (Exception e) {
-            Log.d("Exception get JCP!", e.toString());
+            Log.d("Exception when fetching", e.toString());
             return list;
         }
+
+        Log.d("Fetching non working", "-------------------");
         return list;
     }
 
@@ -4042,7 +4233,6 @@ public class NestleDb extends SQLiteOpenHelper {
             return false;
         }
     }
-
 
 
     public ArrayList<StoreGrading> getstoreGrading(MappingJourneyPlan jcp) {
@@ -4849,8 +5039,8 @@ public class NestleDb extends SQLiteOpenHelper {
         Cursor dbcursor = null;
         try {
 
-            dbcursor = db.rawQuery("SELECT * FROM Mapping_JourneyPlan WHERE UploadStatus ='" + staus +"'  AND VisitDate = '" + date +
-                    "' UNION SELECT * FROM JourneyPlan_NonMerchandised  WHERE UploadStatus ='" + staus +"' and VisitDate = '" + date + "'", null);
+            dbcursor = db.rawQuery("SELECT * FROM Mapping_JourneyPlan WHERE UploadStatus ='" + staus + "'  AND VisitDate = '" + date +
+                    "' UNION SELECT * FROM JourneyPlan_NonMerchandised  WHERE UploadStatus ='" + staus + "' and VisitDate = '" + date + "'", null);
 
 
             if (dbcursor != null) {
@@ -5539,6 +5729,7 @@ public class NestleDb extends SQLiteOpenHelper {
 
         return l;
     }
+
     public ArrayList<ViisbilityDriveGetterSetter> getStoreRDVisibility(String visitDate) {
 
         ArrayList<ViisbilityDriveGetterSetter> list = new ArrayList<ViisbilityDriveGetterSetter>();
@@ -5574,8 +5765,6 @@ public class NestleDb extends SQLiteOpenHelper {
     }
 
 
-
-
     public ArrayList<ViisbilityDriveGetterSetter> getStoreRDVisibilityUpload(String storeId, String visit_date) {
 
         ArrayList<ViisbilityDriveGetterSetter> list = new ArrayList<ViisbilityDriveGetterSetter>();
@@ -5599,8 +5788,6 @@ public class NestleDb extends SQLiteOpenHelper {
                     pgs.setPresent(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_PRESENT)));
                     pgs.setImage_long(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE_LONG)));
                     pgs.setImage_close(dbcursor.getString(dbcursor.getColumnIndexOrThrow(CommonString.KEY_IMAGE_CLOSE)));
-
-
 
 
                     list.add(pgs);
@@ -5643,7 +5830,6 @@ public class NestleDb extends SQLiteOpenHelper {
             return false;
         }
     }
-
 
 
     public boolean insertMaster_DriveNonVisibilityData(MasterDriveNonVisibilityGetterSetter nonWorkingdata) {

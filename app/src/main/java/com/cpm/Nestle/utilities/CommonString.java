@@ -5,7 +5,7 @@ import android.os.Environment;
 public class CommonString {
     public static final String TABLE_Journey_Plan_DBSR_Saved = "Journey_Plan_DBSR_Saved";
     public static final String TAG_PROGRAM_OBJECT = "PROGRAM_OBJECT";
-    public static final String KEY_EXIST = "Exist";
+
     public static final String KEY_DDATE = "DATE";
     public static final String KEY_SUB_PROGRAM_ID = "SUB_PROGRAM_iD";
     public static final String KEY_SUB_PROGRAM = "SUB_PROGRAM";
@@ -65,7 +65,6 @@ public class CommonString {
     public static final String KEY_IMAGE = "IMAGE";
     public static final String KEY_SAMPLE_ID = "SAMPLE_ID";
     public static final String KEY_SAMPLE = "SAMPLE";
-    public static final String KEY_MOBILE_NO = "MOBILE";
     public static final String KEY_NAME = "NAME";
 
     public static final String KEY_ID = "KEY_ID";
@@ -73,14 +72,11 @@ public class CommonString {
     public static final String TAG_OBJECT = "OBJECT";
     public static final String KEY_DOWNLOAD_INDEX = "download_Index";
     public static final String KEY_COMMON_ID = "COMMON_ID";
-    public static final String KEY_WINDOW_CD = "WINDOW_CD";
-    public static final String KEY_CHECKLIST_CD = "CHECKLIST_CD";
+
     public static final String KEY_BRAND_ID = "BRAND_ID";
     public static final String KEY_VCiD = "VCiD";
     public static final String KEY_CATEGORY_ID = "CATEGORY_ID";
     public static final String KEY_CATEGORY = "CATEGORY";
-    public static final String KEY_SUB_CATEGORY = "SUB_CATEGORY";
-    public static final String KEY_SUB_CATEGORY_ID = "SUB_CATEGORY_ID";
 
 
     public static final String KEY_IMAGE_LEVEL1 = "IMAGE_LEVEL1";
@@ -92,8 +88,9 @@ public class CommonString {
     public static final String KEY_BARSCAN_FLAG = "BARSCAN_FLAG";
     public static final String KEY_IMAGE1 = "IMAGE1";
     public static final String KEY_IMAGE2 = "IMAGE2";
+    public static final String KEY_IMAGE3 = "IMAGE3";
     public static final String KEY_EDIT_VALUE = "EDIT_VALUE";
-    public static final String KEY_BRAND_CD = "BRAND_CD";
+    public static final String KEY_STOCK = "STOCK";
     public static final String KEY_BRAND = "BRAND";
     public static final String KEY_QUESTION_IMAGEALLOW1 = "QUESTION_IMAGEALLOW1";
     public static final String KEY_QUESTION_IMAGEALLOW2 = "QUESTION_IMAGEALLOW2";
@@ -182,17 +179,16 @@ public class CommonString {
     public static final int CAPTURE_MEDIA = 131;
     public static final String TABLE_ADDITIONAL_VISIBILITY = "DR_ADDITIONALVISIBILITY";
     public static final String KEY_MENU_ID = "MENU_ID";
-    public static final String KEY_DISPLAY_ID = "DISPLAY_ID";
-    public static final String KEY_DISPLAY = "DISPLAY";
+
     public static String IS_PASSWORD_CHECK = "IS_PASSWORD_CHECK";
     public static String MPIN = "MPIN";
     public static final String KEY_IS_QUIZ_DONE = "is_quiz_done";
     public static final String KEY_QUESTION_CD = "question_cd";
-    public static final String TABLE_INSERT_OPENINGHEADER_DATA = "STOCKHEADER_DATA";
+
     public static final String KEY_REFIMAGE = "REF_IMGAGE";
     public static final String TABLE_PROMOTION_DATA = "DR_PROMOTION";
     public static final String KEY_PROMOTION_ID = "PROMOTION_ID";
-    public static final String KEY_PROMOTION_PRESENT = "PRESENT";
+
     public static final String KEY_POSM_AVAILEBILITY = "POSM_AVAIL";
     public static final String CREATE_TABLE_STORE_GEOTAGGING = "CREATE TABLE IF NOT EXISTS "
             + TABLE_STORE_GEOTAGGING
@@ -394,26 +390,17 @@ public class CommonString {
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
             + KEY_VISIT_DATE + " VARCHAR,"
             + KEY_STORE_ID + " INTEGER,"
-
             + KEY_CATEGORY_ID + " INTEGER,"
-            + KEY_CATEGORY + " VARCHAR,"
             + KEY_PROMOTION_ID + " INTEGER,"
-            + KEY_PROMOTION + " VARCHAR,"
-            + KEY_PRESENT + " VARCHAR,"
-            + KEY_IMAGE + " VARCHAR,"
+            + KEY_CHECKLIST_ID + " INTEGER,"
+            + KEY_ANSWER_CD + " INTEGER,"
+            + KEY_IMAGE1 + " VARCHAR,"
             + KEY_IMAGE2 + " VARCHAR,"
-            + KEY_CHECKED_iD + " INTEGER,"
-            + KEY_REASON_ID + " INTEGER,"
-            + KEY_REASON + " VARCHAR)";
+            + KEY_IMAGE3 + " VARCHAR,"
+            + KEY_STOCK + " INTEGER,"
+            + KEY_REASON_ID + " INTEGER)";
 
 
-    public static final String TABLE_INSERT_CHECKLIST_DATA = "CheckList_DATA";
-    //category dressing
-    public static final String TABLE_CATEGORY_DRESSING_DATA = "CATEGORY_DRESSING_DATA";
-    public static final String TABLE_INSERT_CATEGORY_DRESSING_CHECKLIST_DATA = "CATEGORY_DRESSING_CHECKLIST_DATA";
-    //Asset checklist
-    public static final String TABLE_ASSET_HEADER = "ASSET_HEADER";
-    public static final String TABLE_AUDIT_DATA_SAVE = "Audit_Data_Save";
     public static final String KEY_STORE_TYPE = "STORE_TYPE";
     public static final String KEY_STORE_TYPE_CD = "STORE_TYPE_CD";
     public static final String KEY_STORE_ADDRESS = "STORE_ADDRESS";
@@ -490,7 +477,7 @@ public class CommonString {
             + KEY_REMARK + " VARCHAR)";
 
 
- public static final String TABLE_VQPS = "DR_VQPS";
+    public static final String TABLE_VQPS = "DR_VQPS";
     public static final String CREATE_TABLE_VQPS = "CREATE TABLE IF NOT EXISTS " + TABLE_VQPS
             + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
@@ -518,7 +505,6 @@ public class CommonString {
             + KEY_JCP_TYPE + " VARCHAR)";
 
 
-
     public static final String CREATE_TABLE_VISIBILITY_DRIVE_DATA = "CREATE TABLE  IF NOT EXISTS "
             + TABLE_VISIBILITY_DRIVE_DATA
             + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
@@ -533,7 +519,7 @@ public class CommonString {
             + KEY_IMAGE_LONG + " VARCHAR,"
             + KEY_IMAGE_CLOSE + " VARCHAR,"
             + KEY_PRESENT + " VARCHAR,"
-            + KEY_VISIT_DATE+ " VARCHAR)";
+            + KEY_VISIT_DATE + " VARCHAR)";
 
     public static final String CREATE_TABLE_RDVISIBILITY_DRIVE_DATA = "CREATE TABLE  IF NOT EXISTS "
             + TABLE_RDVISIBILITY_DRIVE_DATA
@@ -549,5 +535,5 @@ public class CommonString {
             + KEY_PRESENT_DEPLOYED + " VARCHAR,"
             + KEY_IMAGE_CLOSE + " VARCHAR,"
             + KEY_PRESENT + " VARCHAR,"
-            + KEY_VISIT_DATE+ " VARCHAR)";
+            + KEY_VISIT_DATE + " VARCHAR)";
 }

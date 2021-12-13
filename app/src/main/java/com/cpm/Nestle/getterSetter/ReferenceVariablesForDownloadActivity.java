@@ -14,7 +14,7 @@ public class ReferenceVariablesForDownloadActivity {
     protected MasterCategoryGetterSetter masterCategoryGetterSetter;
 
     protected  MasterBrandGetterSetter masterBrandGetterSetter,mastercompany;
-    protected  MasterChecklistGetterSetter masterChecklistGetterSetter;
+    protected  MasterChecklistGetterSetter masterChecklistGetterSetter,masterpromoChecklist,masterpromoChecklistans;
     protected  MasterAssetGetterSetter masterAssetGetterSetter,mappingpaidVisib,masaternonassetreason,masterassetlocation;
     protected  MappingPosmGetterSetter mappingPosmGetterSetter;
     protected  MasterChecklistAnswerGetterSetter masterChecklistAnswerGetterSetter,mappingsubprogramchecklist,mappingprogram,mappingvisicooler_checklist,

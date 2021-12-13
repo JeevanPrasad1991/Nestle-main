@@ -183,9 +183,9 @@ public class EntryMenuActivity extends AppCompatActivity {
 
                 case 5:
                     db.open();
-                    if (db.getPromotionData(journeyPlan).size() > 0) {
+                    if (db.getPromotionCategory(journeyPlan).size() > 0) {
                         db.open();
-                        if (db.getinsertedpromotions(journeyPlan).size() > 0) {
+                        if (db.getinsertedpromotions(journeyPlan.getStoreId().toString(),journeyPlan.getVisitDate()).size() > 0) {
                             icon_path = current.getTickIcon();
                         } else {
                             icon_path = current.getNormalIcon();
@@ -318,7 +318,7 @@ public class EntryMenuActivity extends AppCompatActivity {
 
                         case 5:
                             db.open();
-                            if (db.getPromotionData(journeyPlan).size() > 0) {
+                            if (db.getPromotionCategory(journeyPlan).size() > 0) {
                                 startActivity(new Intent(context, PromotionActivity.class).putExtra(CommonString.TAG_OBJECT, journeyPlan)
                                         .putExtra(CommonString.KEY_MENU_ID, current));
                                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
@@ -506,9 +506,9 @@ public class EntryMenuActivity extends AppCompatActivity {
 
                 case 5:
                     db.open();
-                    if (db.getPromotionData(journeyPlan).size() > 0) {
+                    if (db.getPromotionCategory(journeyPlan).size() > 0) {
                         db.open();
-                        if (db.getinsertedpromotions(journeyPlan).size() > 0) {
+                        if (db.getinsertedpromotions(journeyPlan.getStoreId().toString(),journeyPlan.getVisitDate()).size() > 0) {
                             status = true;
                         } else {
                             status = false;
